@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Page not found - infosecurity.ch</title>
+<script>
+// Old URLs that GitHub Pages cannot serve directly (query strings, renamed pages)
+// are mapped in /redirects.json: {"/old/path?x=1": "/new/path/"}
+(function () {
+  var key = location.pathname + location.search;
+  fetch("/redirects.json").then(function (r) { return r.json(); }).then(function (map) {
+    var to = map[key] || map[location.pathname];
+    if (to) location.replace(to + location.hash);
+  }).catch(function () {});
+})();
+</script>
+</head>
+<body>
+<h1>Page not found</h1>
+<p><a href="/">infosecurity.ch home</a></p>
+</body>
+</html>
