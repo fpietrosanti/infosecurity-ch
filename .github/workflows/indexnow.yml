@@ -1,0 +1,19 @@
+name: IndexNow ping
+
+# Manual: run after the DNS cut-over and after big content changes.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install beautifulsoup4 lxml markdownify
+      - run: python scripts/indexnow.py

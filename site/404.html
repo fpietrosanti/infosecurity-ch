@@ -4,21 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Page not found - infosecurity.ch</title>
+<title>Page not found | infosecurity.ch</title>
+<link rel="stylesheet" href="/wp-content/themes/codium-extend/style.css">
 <script>
-// Old URLs that GitHub Pages cannot serve directly (query strings, renamed pages)
-// are mapped in /redirects.json: {"/old/path?x=1": "/new/path/"}
 (function () {
-  var key = location.pathname + location.search;
+  var path = location.pathname, dec = path;
+  try { dec = decodeURIComponent(path); } catch (e) {}
+  // old broken links such as "/tag/x/ http://host/file.pdf"
+  var ext = dec.match(/\s(https?:\/\/?\S+?)\/?$/);
+  if (ext) { location.replace(ext[1].replace(/^(https?:)\/(?!\/)/, "$1//")); return; }
+  // outbound links tracked by the old analytics plugin
+  var out = dec.match(/^\/outgoing\/(.+?)\/?$/);
+  if (out) { location.replace("http://" + out[1]); return; }
+  if (!/\/$/.test(path) && !/\.[A-Za-z0-9]+$/.test(path)) { location.replace(path + "/" + location.search + location.hash); return; }
   fetch("/redirects.json").then(function (r) { return r.json(); }).then(function (map) {
-    var to = map[key] || map[location.pathname];
-    if (to) location.replace(to + location.hash);
+    if (map[path]) { location.replace(map[path] + location.hash); return; }
+    // translation that was never generated: fall back to the English original
+    var m = path.match(/^\/(ar|be|bg|ca|cs|da|de|el|es|et|fa|fi|fr|ga|gl|hi|hr|hu|id|is|it|iw|ja|ko|lt|lv|mk|ms|mt|nl|no|pl|pt|ro|ru|sk|sl|sq|sr|sv|th|tl|tr|uk|vi|zh\-CN|zh\-TW)(\/.*)$/);
+    if (m) { location.replace(m[2] + location.hash); }
   }).catch(function () {});
 })();
 </script>
 </head>
 <body>
-<h1>Page not found</h1>
-<p><a href="/">infosecurity.ch home</a></p>
+<div id="wrapper" style="padding:2em">
+<h1 style="font-size:2.5em">Page not found</h1>
+<p>This URL does not exist on the restored <a href="/">infosecurity.ch</a> archive.</p>
+<form action="https://duckduckgo.com/" method="get"><input type="hidden" name="sites" value="infosecurity.ch">
+<input type="text" name="q" aria-label="Search infosecurity.ch"> <input type="submit" value="Search"></form>
+</div>
 </body>
 </html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Not every elliptic curve is the same: trough on ECC security | infosecurity.ch</title>
+<meta name="description" content="My own ECC curve security and selection analysis Most modern crypto use Elliptic Curve Cryptographic (ECC) that, with a smaller key size and reduce…"/>
+<link rel="canonical" href="https://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/"/>
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/>
+<meta name="author" content="Fabio Pietrosanti (naif)"/>
+<meta http-equiv="content-language" content="en"/>
+<link rel="alternate" hreflang="en" href="https://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/"/>
+<link rel="alternate" hreflang="be" href="https://infosecurity.ch/be/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/"/>
+<link rel="alternate" hreflang="x-default" href="https://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="infosecurity.ch"/>
+<meta property="og:title" content="Not every elliptic curve is the same: trough on ECC security"/>
+<meta property="og:description" content="My own ECC curve security and selection analysis Most modern crypto use Elliptic Curve Cryptographic (ECC) that, with a smaller key size and reduce…"/>
+<meta property="og:url" content="https://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/"/>
+<meta property="og:image" content="https://infosecurity.ch/wp-content/uploads/2010/09/vn9jna1BdgrzDCYNBJHi09q09q.jpg"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:creator" content="@fpietrosanti"/>
+<meta name="twitter:title" content="Not every elliptic curve is the same: trough on ECC security"/>
+<meta name="twitter:description" content="My own ECC curve security and selection analysis Most modern crypto use Elliptic Curve Cryptographic (ECC) that, with a smaller key size and reduce…"/>
+<meta name="twitter:image" content="https://infosecurity.ch/wp-content/uploads/2010/09/vn9jna1BdgrzDCYNBJHi09q09q.jpg"/>
+<meta property="article:published_time" content="2010-09-26T13:05:34+00:00"/>
+<meta property="article:author" content="https://fabio.pietrosanti.it/"/>
+<meta property="article:section" content="security"/>
+<meta property="article:section" content="technology"/>
+<meta property="article:tag" content="encryption"/>
+<meta property="article:tag" content="voicesecurity"/>
+<meta property="article:tag" content="zrtp"/>
+<link rel="alternate" type="application/rss+xml" title="infosecurity.ch RSS" href="/feed.xml"/>
+<link rel="alternate" type="text/markdown" href="/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/index.md"/>
+<link rel="author" href="https://fabio.pietrosanti.it/"/>
+<link rel="me" href="https://www.linkedin.com/in/secret/"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/#article","headline":"Not every elliptic curve is the same: trough on ECC security","description":"My own ECC curve security and selection analysis Most modern crypto use Elliptic Curve Cryptographic (ECC) that, with a smaller key size and reduce…","url":"https://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/","mainEntityOfPage":"https://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/","datePublished":"2010-09-26T13:05:34+00:00","dateModified":"2010-09-26T13:05:34+00:00","inLanguage":"en","author":{"@type":"Person","@id":"https://infosecurity.ch/#author","name":"Fabio Pietrosanti","alternateName":"naif","url":"https://fabio.pietrosanti.it/","sameAs":["https://fabio.pietrosanti.it/","https://www.linkedin.com/in/secret/","https://x.com/fpietrosanti","https://twitter.com/fpietrosanti","https://github.com/fpietrosanti","https://www.slideshare.net/fpietrosanti"],"knowsAbout":["Information security","Privacy","Encryption","Voice encryption","ZRTP","Lawful interception","Tor","Whistleblowing"]},"publisher":{"@id":"https://infosecurity.ch/#author"},"image":"https://infosecurity.ch/wp-content/uploads/2010/09/vn9jna1BdgrzDCYNBJHi09q09q.jpg","isPartOf":{"@id":"https://infosecurity.ch/#blog"},"keywords":"encryption, voicesecurity, zrtp","articleSection":["security","technology"],"commentCount":5,"isAccessibleForFree":true},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://infosecurity.ch/"},{"@type":"ListItem","position":2,"name":"Not every elliptic curve is the same: trough on ECC security","item":"https://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/"}]}]}</script>
+<style>
+.blogtitle{display:block;font-family:'PT+Sans&subset=latin',Helvetica,Verdana,Arial,Sans-Serif;font-size:4em;font-weight:bold;margin:0 0 0 8px}
+div.blogtitle a,div.blogtitle a:link,div.blogtitle a:visited,div.blogtitle a:hover{color:#444;background:transparent}
+h1.single-entry-title,h1.entry-title{color:#444}
+@media screen and (max-width:900px),screen and (max-device-width:480px){div.blogtitle{margin:0 0 0 -8px}}
+iframe.yt{max-width:100%}
+</style>
+<meta name="viewport" content="width=device-width"/>
+<link rel="stylesheet" type="text/css" href="../../wp-content/themes/codium-extend/style.css"/>
+<link href="https://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="../../favicon.ico"/>
+<link rel="stylesheet" id="A2A_SHARE_SAVE-css" href="../../wp-content/plugins/add-to-any/addtoany.min_ver-1.14.css" type="text/css" media="all"/>
+<script type="text/javascript" src="../../wp-includes/js/jquery/jquery_ver-1.12.4.js"></script>
+<script type="text/javascript" src="../../wp-includes/js/jquery/jquery-migrate.min_ver-1.4.1.js"></script>
+<script type="text/javascript" src="../../wp-content/plugins/add-to-any/addtoany.min_ver-1.0.js"></script>
+<link rel="prev" title="ESSOR, European Secure Software Defined Radio (SDR)" href="../../20100925/essor-european-secure-software-defined-radio-sdr/"/>
+<link rel="next" title="A couple of nice VPN provider" href="../../20101017/a-couple-of-nice-vpn-provider/"/>
+<script type="text/javascript">
+var a2a_config=a2a_config||{};a2a_config.callbacks=a2a_config.callbacks||[];a2a_config.templates=a2a_config.templates||{};
+</script>
+<script type="text/javascript" src="../../menu/page.js" async="async"></script>
+</head>
+<body class="wordpress y2018 m03 d12 h08 single postid-282 s-y2010 s-m09 s-d26 s-h14 s-category-security s-category-technology s-tag-encryption s-tag-voicesecurity s-tag-zrtp s-author-naif">
+<div id="wrapperpub">
+	<div id="header">
+		<div class="dp100">	
+			<div id="blog-title" class="blogtitle"><a href="/" title="Playhouse of privacy, security, hacking, encryption, intelligence and some business stuff">Playhouse of privacy, security, hacking, encryption, intelligence and some business stuff</a></div>
+			<div class="description"> </div>
+		</div><!-- dp100 -->		
+	</div><!--  #header -->	
+</div><!--  #wrapperpub -->			
+<div class="clear"></div>
+<div id="wrapper">	
+		<div id="access">
+			<div class="menu">
+				<ul>
+					<li>
+						<a href="/" title="home" class="top_parent">HOME</a>
+					</li>
+				</ul>
+			</div>
+					<div class="menu"><ul>
+<li class="page_item page-item-8"><a href="../../author/">author &#038; blog</a></li>
+</ul></div>
+		</div><!--  #access -->	
+<div class="clear"></div>		
+	<div id="container">
+		<div id="content">
+						<div id="nav-above" class="navigation">
+				<div class="nav-previous"><a href="../../20100925/essor-european-secure-software-defined-radio-sdr/" rel="prev"><span class="meta-nav">&laquo;</span> ESSOR, European Secure Software Defined Radio (SDR)</a></div>
+				<div class="nav-next"><a href="../../20101017/a-couple-of-nice-vpn-provider/" rel="next">A couple of nice VPN provider <span class="meta-nav">&raquo;</span></a></div>
+			</div>
+			<div id="post-282" class="hentry p1 post publish author-naif category-security category-technology tag-encryption tag-voicesecurity tag-zrtp y2010 m09 d26 h14">
+				<h1 class="single-entry-title">Not every elliptic curve is the same: trough on ECC security</h1>
+				<div class="linebreak"></div>
+				<div class="entry-content">
+					<pre style="text-align: center; font-size: 15px;">
+</pre>
+<pre style="text-align: center; font-size: 15px;">
+</pre>
+<div style="display: inline !important;">
+<pre style="text-align: center; font-size: 15px; display: inline !important;">
+</pre>
+<pre style="text-align: center; font-size: 15px;">
+</pre>
+<pre style="text-align: center; font-size: 15px;">
+<font face="Helvetica"><span style="white-space: normal;"><b><font face="Helvetica"><font face="Helvetica" size="3"><font size="4"><font face="Helvetica"><font face="Helvetica"><span style="white-space: normal;"><b>My own ECC curve security and selection analysis</b></span></font></font></font></font></font></b></span></font>
+</pre>
+</div>
+<p style="text-align: center;"><span style="font-size: 15px; white-space: pre;"><img src="../../wp-content/uploads/2010/09/vn9jna1BdgrzDCYNBJHi09q09q.jpg" width="200" height="200" alt="vn9jna1BdgrzDCYNBJHi09q09q.jpg"/></span></p>
+<p style="text-align: left;">Most modern crypto use Elliptic Curve Cryptographic (ECC) that, with a smaller key size and reduce computation power, give equivalent security strength of traditional crypto system known as DH (Diffie-Hellman) or RSA (<span style="visibility: visible;" id="search">Rivest, Shamir and Adleman</span>) .</p>
+<p>Not everyone knows that ECC encryption is selected for any future encryption applications and that even TLS/SSL (encryption used for securing the web) is moving to ECC.</p>
+<p>I found plenty of so called &#8220;proprietary encryption products&#8221; which abandoned RSA and DH to goes with ECC alternatives, that tend to arbitrary use ECC bit key size without even specifying which kind of ECC crypto get used.</p>
+<p>However there is a <a href="http://www.thetechherald.com/article.php/200830/1573/Q&amp;A-with-Bill-Lattin-of-Certicom">lot of confusion around Elliptic Curves,</a> with a lot of different names and key size making difficult for a non-cryptographically-experienced-user to make your own figure when evaluating some crypto stuff.</p>
+<p>Because of so diffused confusion i decided to make my own analysis to find out which are the best ECC encryption curves and right ECC key size to use.</p>
+<p>This analysis would like to provide a security industry based choice among various curves and key sizes, leaving the mathematical and crypto analytical considerations that has been already been done during the years, summarizing the various choices taken in several standards and security protocols.</p>
+<p>First the conclusion.</p>
+<p>From my analysis <b>only the following ECC curves</b> are to be considered for use in encryption systems because are the only one selected among different authorities (ANSI, NSA, SAG, NIST, ECC BrainPool), different security protocol standards (IPSec, OpenPGP, ZRTP, Kerberos, SSL/TLS) and the only one matching NSA Suite B security requirements (de-facto standard also for NATO military environment):</p>
+<ul>
+<li><span style="font-family: Helvetica; white-space: normal;">Elliptic Prime Curve 256 bit - P-256</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">Elliptic Prime Curve 384 bit - P-384</span></li>
+</ul>
+<p>with optional, just for really paranoid that want to get more key size bit, still not considered useful:</p>
+<ul>
+<li><span style="font-family: Helvetica; white-space: normal;">Elliptic Prime Curve 521 bit - P-521</span></li>
+</ul>
+<p>I would like to state that <b>Koblitz curves should be avoided</b>, in any key size (163 / 283 / 409 / 571) as they does not have enough warranty on crypto analytic activity and effectively they are:</p>
+<ul>
+<li><span style="font-family: Helvetica; white-space: normal;">Not part of NSA Suite-B cryptography selection</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">Not part of ECC Brainpool selection</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">Not part of ANSI X9.62 selection</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">Not part of OpenPGP ECC extension selection</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">Not part of Kerberos extension for ECC curve selection</span></li>
+</ul>
+<p>I invite the reader to follow trough my analysis to understand the fundamentals that could be understood even without deep technical background but at least with a good technological background a some basic bit of cryptography.</p>
+<pre style="text-align: center; font-size: 15px;">
+</pre>
+<pre style="text-align: center; font-size: 15px;">
+</pre>
+<div style="display: inline !important;">
+<pre style="text-align: center; font-size: 15px; display: inline !important;">
+<font face="Helvetica"><span style="white-space: normal;"><b><font face="Helvetica"><font face="Helvetica" size="3"><span style="font-size: 12px; white-space: normal;"><b><font size="4"><span style="font-size: 15px;">Here we go with the analysis</span></font></b></span></font></font></b></span></font>
+</pre>
+</div>
+<pre style="text-align: center; font-size: 15px; display: inline !important;">
+</pre>
+<div style="display: inline !important;">
+<pre style="text-align: center; font-size: 15px; display: inline !important;">
+</pre>
+<pre style="text-align: center; font-size: 15px; display: inline !important;">
+</pre>
+<pre style="text-align: center; font-size: 15px; display: inline !important;">
+<span style="font-family: Helvetica; white-space: normal;"><b><font face="Helvetica"><font face="Helvetica" size="3"><font size="4"><font face="Helvetica"><span style="font-family: Helvetica;"> </span></font></font></font></font></b></span>
+</pre>
+</div>
+<p><span style="font-family: Helvetica; white-space: normal;">My goal is to make an analysis on what/how the open scientific and security community choose ECC crypto system for usage in security protocols and standards defined by IETF RFC (the ones who define Internet Standards in a open and peer-reviewed way).</span></p>
+<p><span style="font-family: Helvetica; white-space: normal;">Below a set of RFC introducing ECC into existing system that get analyzed to understand what’s better to use and what’s better to exclude:<br/></span></p>
+<ul>
+<li><span style="font-family: Helvetica; white-space: normal;"><span style="font-family: Helvetica; white-space: normal;"><a href="http://www.rfc-editor.org/rfc/rfc5639.txt">RFC5639</a>: ECC Brainpool Standard Curves & Curve Generation</span></span></li>
+<li><span style="font-family: Helvetica; white-space: normal;"><a href="http://www.ietf.org/rfc/rfc4869.txt">RFC4869</a>: NSA Suite B Cryptographic Suites for IPsec</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;"><a href="http://www.ietf.org/rfc/rfc5430.txt">RFC5430</a>: NSA Suite B profile for Transport Layer Security (TLS)</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;"><a href="http://www.ietf.org/rfc/rfc5008.txt">RFC5008</a>: NSA Suite B in in Secure/Multipurpose Internet Mail Extensions (S/MIME)</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;"><a href="http://www.ietf.org/rfc/rfc3766.txt">RFC3766</a>: Determining Strengths For Public Keys Used For Exchanging Symmetric Keys</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;"><a href="http://www.ietf.org/rfc/rfc5349.txt">RFC5349</a>: Elliptic Curve Cryptography (ECC) Support for Public Key Cryptography for Initial Authentication in Kerberos (PKINIT)</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;"><a href="http://www.ietf.org/rfc/rfc4492">RFC4492</a>: Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer Security (TLS)</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;"><a href="http://tools.ietf.org/html/draft-zimmermann-avt-zrtp">ZRTP voice encryption</a> by Philip Zimmermann ECC curve</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">ECC in OpenPGP (draft d<a href="http://tools.ietf.org/html/draft-jivsov-openpgp-ecc-06">raft-jivsov-openpgp-ecc-06</a>)</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">ECC Curves selected by Microsoft for <a href="http://technet.microsoft.com/en-us/library/ff404285%28WS.10%29.aspx">Smartcard Kerberos login</a></span></li>
+</ul>
+<p>We will use the choice made by scientist defining Internet Security Protocols to make part of our evaluation.<br/>
+Additionally it must be understood that the <b>Curve selection comes from different authorities</b> that made their own selection of Curves in order to tell to the industry what to use and what to skip:</p>
+<ul>
+<li><span style="font-family: Helvetica; white-space: normal;">US <a href="http://www.nist.gov/">NIST</a> (US National Institute of Standards) with <a href="http://csrc.nist.gov/publications/fips/archive/fips186-2/fips186-2.pdf">186-2</a> (recently superseded in 2009 by the new <a href="http://csrc.nist.gov/publications/fips/fips186-3/fips_186-3.pdf">186-3</a>)</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">US <a href="http://www.ansi.org/">ANSI</a> (American National Standard Institute) with <a href="http://webstore.ansi.org/RecordDetail.aspx?sku=ANSI+X9.62%3A2005">X9.62</a></span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">US <a href="http://www.nsa.gov/">NSA</a> (National Security Agency) <a href="http://www.nsa.gov/ia/programs/suiteb_cryptography/">Suite-B Cryptography</a> for <a href="http://en.wikipedia.org/wiki/Security_clearance#Top_Secret">TOP SECRET</a> information exchange</span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">International <a href="http://www.secg.org/">SACG</a> (Standards for efficient cryptography group) with <a href="http://docs.google.com/viewer?url=www.secg.org/collateral/sec2_final.pdf">Recommended Elliptic Curve Domain Parameters</a></span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">German <a href="http://www.ecc-brainpool.org/">ECC Brainpool</a> withECC Brainpool with their <a href="http://docs.google.com/viewer?url=http://www.ecc-brainpool.org/download/Domain-parameters.pdf">Strict Security Requirements</a></span></li>
+<li><a href="http://docs.google.com/viewer?url=www.filibeto.org/~aduritz/truetrue/solaris10/security/crypto/ecc/rsa-ecc-rev8.pdf">ECC Interoperability Forum</a> composed by Certicom, Microsoft, Redhat, Sun, NSA</li>
+</ul>
+<p>We will use the choice made by scientist defining security requirements in the standardization agencies to make part of our evaluation.<br/>
+Additionally, something that most people does not know, but that it’s extremely relevant to our analysis, is that there are different kind of ECC curve cryptography and their &#8220;size&#8221; it’s different depending on the kind of curve:</p>
+<ul>
+<li><span style="font-family: Helvetica; white-space: normal;"><span style="font-family: Helvetica; white-space: normal;">ECC Curves over Prime Field (often referred as <b>Elliptic Curve</b> and represented by <b>P-keysize</b>)</span></span></li>
+<li><span style="font-family: Helvetica; white-space: normal;">ECC Curves over Binary Field (often referred as <b>Koblitz Curve</b> and represented by <b>K-keysize</b>)</span></li>
+</ul>
+<p>Given a <b>security strength equivalence</b> the Elliptic Curve and the Kobliz Curve have different key size, for example when we read ECC 571 we are referring to Koblitz Curve with an equivalent strength to ECC 521 Prime curve.</p>
+<p>A comparison of strength between Elliptic Curves and Kotbliz Curves is reported below (from <a href="http://tools.ietf.org/html/draft-ietf-msec-mikey-ecc">Mikey ECC internet Draft</a>):</p>
+<pre class="newpage">
+| Koblitz |  ECC  |  DH/DSA/RSA
+|   163   |  192  |     1024
+|   283   |  256  |     3072
+|   409   |  384  |     7680
+|   571   |  521  |    15360
+</pre>
+<p>Below there’s a comparison of all selected curves by all the various entities and their respective name (from <a href="http://www.ietf.org/rfc/rfc4492">IETF RFC4492 for ECC usage for TLS</a>) :</p>
+<pre>
+Curve names chosen by different standards organizations
+------------+---------------+-------------
+SECG        |  ANSI X9.62   |  NIST
+------------+---------------+-------------
+sect163k1   |               |   NIST K-163
+sect163r1   |               |
+sect163r2   |               |   NIST B-163
+sect193r1   |               |
+sect193r2   |               |
+sect233k1   |               |   NIST K-233
+sect233r1   |               |   NIST B-233
+sect239k1   |               |
+sect283k1   |               |   NIST K-283
+sect283r1   |               |   NIST B-283
+sect409k1   |               |   NIST K-409
+sect409r1   |               |   NIST B-409
+sect571k1   |               |   NIST K-571
+sect571r1   |               |   NIST B-571
+secp160k1   |               |
+secp160r1   |               |
+secp160r2   |               |
+secp192k1   |               |
+secp192r1   |  prime192v1   |   NIST P-192
+secp224k1   |               |
+secp224r1   |               |   NIST P-224
+secp256k1   |               |
+secp256r1   |  prime256v1   |   NIST P-256
+secp384r1   |               |   NIST P-384
+secp521r1   |               |   NIST P-521
+------------+---------------+-------------
+</pre>
+<p>What immediately appear is that there are only two curves selected by all authorities, and that there is a general dumping of koblitz curves by ANSI.The only commonly agreed among the 3 authorities are the following two ECC curve:</p>
+<ul>
+<li><span style="font-family: Helvetica; white-space: normal;"><span style="font-family: monospace; white-space: pre;">secp192r1 / prime192v1 /</span> NIST P-192</span></li>
+<li><span style="font-family: monospace; white-space: pre;">secp256r1 / prime256v1 /</span> NIST P-256</li>
+</ul>
+<p>Of those selection of ECC curve for TLS the <a href="http://www.ietf.org/rfc/rfc5430.txt">RFC5430</a> skipped completely koblitz curves and selected for usage only:</p>
+<ul>
+<li>P-256, P-384, P-521</li>
+</ul>
+<p>The <a href="http://www.ecc-brainpool.org/">ECC Brainpool</a> skipped completely Koblitz curves and selected for usage the following ECC Curves:</p>
+<ul>
+<li>P-160, P-192, P-224, P-256, P-320, P-384, P-512 (<b>that’s the only particular because it’s not P-521 but P-512, the only key-size referred by ECC brainpool. Tnx Ian Simons from <a href="http://athena-scs.com/">Athena SCS</a>)</b></li>
+</ul>
+<p>The OpenPGP internet draft for ECC usage in PGP d<a href="http://tools.ietf.org/html/draft-jivsov-openpgp-ecc-06">raft-jivsov-openpgp-ecc-06</a> skipped completely Koblitz curves and selected the following ECC curves</p>
+<ul>
+<li>P-256, P-384, P-521</li>
+</ul>
+<p>The Kerberos protocol extension for ECC use, defined in <a href="http://www.faqs.org/rfcs/rfc5349.html">RFC5349</a> and defined by Microsoft for <a href="http://technet.microsoft.com/en-us/library/ff404285%28WS.10%29.aspx">smartcard logon</a> skipped completely Koblitz curves and selected the following ECC curves:</p>
+<ul>
+<li>P-256, P-384, P-521</li>
+</ul>
+<p>So, sounds clear that the right selection of ECC is for P-256, P-384 and P-521 while the Koblitz curve have been skipped for Top Secret use and for any security sensitive protocol (IPSec, OpenPGP, ZRTP, Kerberos, SSL/TLS).</p>
+<div style="text-align: center;">
+  <b>Why i made this analysis?</b>
+</div>
+<p>I have done this analysis following a discussion i had regarding certain voice encryption products, all based on custom and proprietary protocols, that are all using Elliptic Curve Diffie Hellman 571 bit / ECDH 571 / 571-bit ECDH / Koblitz 571 bits .<br/>
+All them are using the K-571 that, as described before, has been removed from all security sensitive environment and protocols and being myself a designer of voice encryption stuff i think that their cryptographic choice is absolutely not the best security choice.<br/>
+Probably it has been done just for marketing purpose, because K-571 (Koblitz curve) seems stronger than P-521 (Elliptic curve based on Prime number). If you have &#8220;more bit&#8221; your marketing guys can claim to be &#8220;more secure&#8221;. Koblitz elliptic curve are faster than the top secret enabled prime elliptic curve and so give the product manager a chance to provide &#8220;more bit&#8221; in it’s own product while keeping the key exchange fast.</p>
+<p>It’s a matter of philosophical choice.</p>
+<p>I prefer to follow the trend of scientific community with the humility of not to considering myself a cryptographic expert, knowledgable more than the overall security and scientific community itself.</p>
+<p>I prefer instead to use only algorithms that are approved for use in highly sensitive environments (top secret classification), that have been selected by all the authorities and working group analyzing encryption algorithms existing out-there and that represent the choice of almost all standard security protocols (IPSec, OpenPGP, ZRTP, Kerberos, SSL/TLS, etc).<br/>
+I prefer to count the amount of brains working on the crypto i use, that check that’s really secure, that evaluate whether there’s some weakness.</p>
+<p>The number of brais working on Crypto widely diffused are of order of magnitude more than the number of brains working on crypto used by just few people (like Koblitz curve).<br/>
+So i am not demonizing who use ECDH 571 using Koblitz Curve, but for sure i can affirm that they did not taken the best choice in terms of security and that any security professionals doing a security benchmarking would consider the fact that Elliptic Curve Diffie Hellman 571 bit done with Koblitz Curve is not widely diffused, it’s dumped from standard security protocols and it’s not certified for top secret use.</p>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list" data-a2a-url="https://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/" data-a2a-title="Not every elliptic curve is the same: trough on ECC security"><a class="a2a_button_facebook" href="https://www.addtoany.com/add_to/facebook?linkurl=https%3A%2F%2Finfosecurity.ch%2F20100926%2Fnot-every-elliptic-curve-is-the-same-trough-on-ecc-security%2F&amp;linkname=Not%20every%20elliptic%20curve%20is%20the%20same%3A%20trough%20on%20ECC%20security" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_button_twitter" href="https://www.addtoany.com/add_to/twitter?linkurl=https%3A%2F%2Finfosecurity.ch%2F20100926%2Fnot-every-elliptic-curve-is-the-same-trough-on-ecc-security%2F&amp;linkname=Not%20every%20elliptic%20curve%20is%20the%20same%3A%20trough%20on%20ECC%20security" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"></a></div></div>					
+					<div class="clear"></div>
+					 				</div>
+				<div class="entry-meta">
+					<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/" title="1:05 pm" rel="bookmark"><span class="entry-date">26 September 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/naif/" title="View all posts by naif">naif</a></span>.					This entry was posted in <a href="../../category/business/security/" rel="category tag">security</a>, <a href="../../category/privacy/technology/" rel="category tag">technology</a> and tagged <a href="../../tag/encryption/" rel="tag">encryption</a>, <a href="../../tag/voicesecurity/" rel="tag">voicesecurity</a>, <a href="../../tag/zrtp/" rel="tag">zrtp</a>. Bookmark the <a href="../../20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/" title="Permalink to Not every elliptic curve is the same: trough on ECC security" rel="bookmark">permalink</a>.	
+									</div>
+				<div class="clear"></div>
+			</div><!-- .post -->
+			<div id="nav-below" class="navigation">
+				<div class="nav-previous"><a href="../../20100925/essor-european-secure-software-defined-radio-sdr/" rel="prev"><span class="meta-nav">&laquo;</span> ESSOR, European Secure Software Defined Radio (SDR)</a></div>
+				<div class="nav-next"><a href="../../20101017/a-couple-of-nice-vpn-provider/" rel="next">A couple of nice VPN provider <span class="meta-nav">&raquo;</span></a></div>
+			</div>
+			<div id="comments">
+				<div id="comments-list" class="comments">
+					<h3><span>5</span> Comments</h3>
+					<div id="comments-nav-above" class="comments-navigation">
+					</div>
+   <li id="comment-235" class="comment c c-y2010 c-m10 c-d23 c-h13 alt">
+      <span class="count">1</span>
+      <div class="comment-author vcard">
+        <img alt="" src="../../avatar/40d46824dd0ece7109a223622cb97f1a-s-48-d-mm-r-g.jpg" srcset="../../avatar/40d46824dd0ece7109a223622cb97f1a-s-96-d-mm-r-g.jpg 2x" class="avatar avatar-48 photo" height="48" width="48"/>		<div class="fn">badmash</div>       </div>
+      <div class="comment-meta">23 October 2010 - 12:32 pm <span class="meta-sep">|</span> <a href="#comment-235" title="Permalink to this comment">Permalink</a></div>
+	  <div class="clear"></div>	
+      <p>I just signed up to your blogs rss feed. Will you post more on this subject?</p>
+      <div class="reply">
+               </div>
+</li><!-- #comment-## -->
+   <li id="comment-241" class="comment c1 c-y2010 c-m10 c-d27 c-h01">
+      <span class="count">2</span>
+      <div class="comment-author vcard">
+        <img alt="" src="../../avatar/7b2c6715522ac024629a6f91022bab9d-s-48-d-mm-r-g.jpg" srcset="../../avatar/7b2c6715522ac024629a6f91022bab9d-s-96-d-mm-r-g.jpg 2x" class="avatar avatar-48 photo" height="48" width="48"/>		<div class="fn">Ian Simmons</div>       </div>
+      <div class="comment-meta">27 October 2010 - 12:57 am <span class="meta-sep">|</span> <a href="#comment-241" title="Permalink to this comment">Permalink</a></div>
+	  <div class="clear"></div>	
+      <p>I believe there is a flaw in this article. ECC Brainpool specifies an ECC FP 512-bit key not 521-bit. See RFC5639 section 2.2. Technical Requirements bullet 1.</p>
+      <div class="reply">
+               </div>
+</li><!-- #comment-## -->
+   <li id="comment-316" class="comment c2 c-y2011 c-m05 c-d26 c-h11 alt">
+      <span class="count">3</span>
+      <div class="comment-author vcard">
+        <img alt="" src="../../avatar/d2e3ce5aa1a3e3ad3a8ed4c97bbfe8e1-s-48-d-mm-r-g.jpg" srcset="../../avatar/d2e3ce5aa1a3e3ad3a8ed4c97bbfe8e1-s-96-d-mm-r-g.jpg 2x" class="avatar avatar-48 photo" height="48" width="48"/>		<div class="fn"><a href="http://www.opentrust.com/" rel="external nofollow" class="url">Mathias Brossard</a></div>       </div>
+      <div class="comment-meta">26 May 2011 - 10:46 am <span class="meta-sep">|</span> <a href="#comment-316" title="Permalink to this comment">Permalink</a></div>
+	  <div class="clear"></div>	
+      <p>After looking at RFC5639 and the Brainpool site, I’m quite sure the Brainpool P-curves are not the same than SECG, X9.62, NIST. They’re using a very similar methodology, but chose to generate new curves using the same sizes (except for 512 bits instead of 521 bits). They cite improved security, using a value for &#8216;p’ that has no special form (to avoid patented fast arithmetic) and a general distrust of NIST curves (not explicitly said) that have no explanation for the different seeds used.</p>
+      <div class="reply">
+               </div>
+</li><!-- #comment-## -->
+   <li id="comment-442" class="comment c3 c-y2013 c-m09 c-d22 c-h17">
+      <span class="count">4</span>
+      <div class="comment-author vcard">
+        <img alt="" src="../../avatar/3e2d17df5854ea23cbf8f453450d4979-s-48-d-mm-r-g.jpg" srcset="../../avatar/3e2d17df5854ea23cbf8f453450d4979-s-96-d-mm-r-g.jpg 2x" class="avatar avatar-48 photo" height="48" width="48"/>		<div class="fn">Jonny</div>       </div>
+      <div class="comment-meta">22 September 2013 - 4:59 pm <span class="meta-sep">|</span> <a href="#comment-442" title="Permalink to this comment">Permalink</a></div>
+	  <div class="clear"></div>	
+      <p>Very interesting article! I’d love to read more - especially on ECC. Good information  seems thin on the ground.</p>
+      <div class="reply">
+               </div>
+</li><!-- #comment-## -->
+   <li id="comment-498" class="comment c4 c-y2014 c-m03 c-d06 c-h13 alt">
+      <span class="count">5</span>
+      <div class="comment-author vcard">
+        		<div class="fn">Johannes Merkle</div>       </div>
+      <div class="comment-meta">6 March 2014 - 12:16 pm <span class="meta-sep">|</span> <a href="#comment-498" title="Permalink to this comment">Permalink</a></div>
+	  <div class="clear"></div>	
+      <p>As author of RFC 5639 , I confirm that the Brainpool curves are completely different from the NIST curves. This is made quite clear in RFC 5639. </p>
+<p>The main difference between the Brainpool curves and the NIST curves is that the Brainpool curves have been deduced in a straightforward way from fundamental constants and thus, it is obvious that htere is no backdoor implanted, while the origin of the seeds from which the NIST curves have been deduced is not clear, leaving a lot of room for speculation about NSA backdoors.</p>
+      <div class="reply">
+               </div>
+</li><!-- #comment-## -->
+					<div id="comments-nav-below" class="comments-navigation">
+					</div>
+				</div><!-- #comments-list .comments -->
+	<div id="respond" class="comment-respond"><p class="comments-closed" style="padding:1em;background:#f4f4f4;border-left:4px solid #888">Comments are closed. This blog is a historical archive, restored on 17 September 2026 (<a href="/20260917/infosecurity-ch-restored/">read more</a>).</p></div><!-- #respond -->
+			</div><!-- #comments -->
+		</div><!-- #content -->
+	</div><!-- #container -->
+<div id="primary" class="sidebar">
+	<ul class="xoxo">
+			<li id="search-2" class="widget widget_search"><div class="widgetblock"><form role="search" method="get" id="searchform" class="searchform" action="https://duckduckgo.com/"><input type="hidden" name="sites" value="infosecurity.ch"/>
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="q" id="s"/>
+					<input type="submit" id="searchsubmit" value="Search"/>
+				</div>
+			</form>
+			</div></li>
+			<li id="text-3" class="widget widget_text"><div class="widgetblock">
+				<div class="widgettitleb"><h3 class="widgettitle">About</h3></div>
+			<div class="textwidget">My interest in espionage/counterespionage, hacking, privacy, security, technology and sometime business and marketing stuff related to security world. BLOG IS IN ENGLISH. TRANSLATIONS ARE AUTOMATIC.
+</div>
+			</div></li>
+			<li id="twitter-1" class="widget widget_twitter"><div class="widgetblock">
+				<div class="widgettitleb"><h3 class="widgettitle"><a href="http://twitter.com/fpietrosanti" class="twitter_title_link">Twitter</a></h3></div>
+<ul class="twitter"><li>No public Twitter messages.</li></ul>
+			</div></li>
+			<li id="recent-posts-2" class="widget widget_recent_entries"><div class="widgetblock">		
+				<div class="widgettitleb"><h3 class="widgettitle">Recent Posts</h3></div>
+		<ul>
+					<li>
+				<a href="/20260917/infosecurity-ch-restored/">infosecurity.ch is back online: the blog has been restored</a>
+						</li>
+					<li>
+				<a href="../../20170610/low-liability-reduced-abuses-tor-exit-nodes/">Low Liability - Reduced Abuses Tor Exit Nodes</a>
+						</li>
+					<li>
+				<a href="../../20110411/rfc-6189-zrtp-is-finally-a-standard/">RFC 6189: ZRTP is finally a standard!</a>
+						</li>
+					<li>
+				<a href="../../20110223/progress-for-gsm-cracking-in-freiburg-university/">Progress for GSM cracking in Freiburg university</a>
+						</li>
+					<li>
+				<a href="../../20110124/my-tor-exit-node-experience-trying-to-filter-out-noisy-traffic/">My TOR exit node experience trying to filter out noisy traffic</a>
+						</li>
+					<li>
+				<a href="../../20110123/tetra-hacking-is-coming-osmocomtetra/">TETRA hacking is coming: OsmocomTETRA</a>
+						</li>
+					<li>
+				<a href="../../20110115/government-2-0-open-data-and-wikileaks/">Government 2.0, Open Data and WikiLeaks</a>
+						</li>
+					<li>
+				<a href="../../20110112/zorg-new-c-and-java-zrtp-implementation-public-release/">ZORG, new C++ and Java ZRTP implementation public release</a>
+						</li>
+					<li>
+				<a href="../../20101025/encrypted-mobile-to-landline-phone-calls-with-asterisk-1-8/">Encrypted mobile to landline phone calls with Asterisk 1.8</a>
+						</li>
+					<li>
+				<a href="../../20101021/eight-epic-failure-of-regulating-cryptography/">Eight Epic Failure of Regulating Cryptography</a>
+						</li>
+					<li>
+				<a href="../../20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/">PrivateGSM: Blackberry/iPhone/Nokia mobile voice encryption with ZRTP or SRTP/SDES</a>
+						</li>
+					<li>
+				<a href="../../20101017/a-couple-of-nice-vpn-provider/">A couple of nice VPN provider</a>
+						</li>
+					<li>
+				<a href="../../20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/">Not every elliptic curve is the same: trough on ECC security</a>
+						</li>
+					<li>
+				<a href="../../20100925/essor-european-secure-software-defined-radio-sdr/">ESSOR, European Secure Software Defined Radio (SDR)</a>
+						</li>
+					<li>
+				<a href="../../20100912/product-management-and-organization/">Product management and organization</a>
+						</li>
+					<li>
+				<a href="../../20100910/remotely-intercepting-snom-voip-phones/">Remotely intercepting snom VoIP phones</a>
+						</li>
+					<li>
+				<a href="../../20100826/voice-communication-security-workshop/">Voice communication security workshop</a>
+						</li>
+					<li>
+				<a href="../../20100815/27c3-ccc-congress-cfp-we-come-in-peace/">27C3 - CCC Congress CFP: We come in peace</a>
+						</li>
+					<li>
+				<a href="../../20100723/gsm-cracking-in-penetration-test-methodologies-osstmm/">GSM cracking in penetration test methodologies (OSSTMM) ?</a>
+						</li>
+					<li>
+				<a href="../../20100719/snake-oil-security-claims-on-crypto-security-product/">Snake-oil security claims on crypto security product</a>
+						</li>
+					<li>
+				<a href="../../20100717/web2-0-privacy-leak-in-mobile-apps/">Web2.0 privacy leak in Mobile apps</a>
+						</li>
+				</ul>
+			</div></li>
+			</ul>
+</div><!-- #primary .sidebar -->
+<div id="secondary" class="sidebar">
+	<ul class="xoxo">
+		</ul>
+</div><!-- #secondary .sidebar --><div id="footer">
+</div>
+<div id="footerlink"><div class="alignright"><p>Archive restored on 17 September 2026 &middot; <a href="/20260917/infosecurity-ch-restored/">about the restoration</a> &middot; <a href="https://fabio.pietrosanti.it/" rel="author">Fabio Pietrosanti</a></p><p>Proudly powered by <a href="http://www.wordpress.org/">Wordpress</a> and designed by <a href="http://www.code-2-reduction.fr/codium_extend/" title="code reduction" target="blank">code reduction</a></p></div><div class="clear"></div></div></div></body>
+</html>

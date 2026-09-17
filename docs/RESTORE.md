@@ -1,57 +1,82 @@
-# Restoration plan
+# Restoration notes
 
-## 1. Input
+Restored on 2026-09-17 from a Wayback download (1,653 files): WordPress 4.8, theme codium-extend,
+74 posts (2007–2017), Google-Translate proxy copies in 47 languages under `/<lang>/`.
 
-The Wayback copy (downloaded via an online service) goes unmodified into
-`archive/`. It is never edited; `site/` is always regenerated/cleaned from it,
-so the process is repeatable.
+## URL preservation
 
-## 2. Cleanup of Wayback artifacts
+- The original permalinks are `/YYYYMMDD/slug/`, `/tag/x/`, `/category/a/b/`, `/author/naif/`,
+  `/YYYY/MM/`, `/page/N/` and `/<lang>/...`. The downloader stored `/a/b/` as `a/b.html`; the
+  build writes `a/b/index.html`, so the URL is identical and GitHub Pages redirects `/a/b` to `/a/b/` with a 301.
+- `docs/url-inventory.txt` lists 1,305 historical URLs: Wayback CDX 200/301 captures plus the
+  blog-shaped URLs in the downloaded sitemap. `check_urls.py` checks all of them in CI. The run on
+  2026-09-17 found 0 missing.
+- `docs/url-exclusions.txt` lists the URLs deliberately not served, with the reason for each (WordPress
+  endpoints, crawler garbage, posts deleted by the author before 2017).
+- Legacy URLs are served by redirect stubs (meta refresh + canonical + noindex):
+  - every tracked outbound link `/outgoing/<host/path>/` → the external URL
+  - `/<post-or-tag>/feed/` → the page itself
+  - `/20100908/remotely-intercepting-snom-voip-phones/` → `/20100910/…`
+  - the truncated ECC slug → the full slug
+- Shortlinks `/?p=N` (74) and `/?s=term` are handled by a script on the home page. A static host
+  never sees query strings.
+- `404.html` covers three more cases:
+  - broken old links such as `/tag/x/%20http://host/file.pdf` → the external file
+  - any `/outgoing/…` path → its host
+  - a missing translation `/<lang>/path/` → the English original
+- `/feed/`, `/feed/rss/`, `/feed/rss2/`, `/feed/atom/` serve the RSS XML, so old subscribers keep
+  working. The canonical feed is `/feed.xml`.
 
-Typical things to strip or fix in the downloaded HTML:
+## Cleanup (content unchanged)
 
-- Wayback toolbar / injected `<script>` and `<!-- BEGIN WAYBACK TOOLBAR -->` blocks
-- Rewritten links: `https://web.archive.org/web/2018xxxxxx/http://www.infosecurity.ch/foo`
-  → `/foo` (root-relative, so they work on both `github.io` and the custom domain)
-- Absolute `http://infosecurity.ch/...` links → root-relative
-- Missing assets (images/CSS/JS the archive never captured) → list them, recover
-  individually from other snapshots, or replace
-- Third-party embeds that no longer exist (old analytics, widgets) → remove
-- Forms/dynamic endpoints (search, contact, comments) → remove or replace with static text
+- Removed: dead Google Analytics (UA), WordPress emoji, XML-RPC/EditURI/wlwmanifest/oEmbed/shortlink
+  headers, Akismet and comment-reply scripts, Google+ share buttons.
+- Comment forms are replaced by a "comments are closed" notice. Existing comments stay.
+- Search goes to DuckDuckGo, restricted to infosecurity.ch.
+- All `http://infosecurity.ch` references are now HTTPS. Flash YouTube embeds became `youtube-nocookie` iframes.
+- **Outbound links restored.** The downloader had replaced outbound links with local copies of
+  third-party documents (NIST, RFCs, theses, law-firm PDFs…). The analytics `onclick` path still
+  recorded each original target, so the build restores the real external URL and does not
+  republish third-party files.
+- **Spam link removed.** The old WordPress had been tampered with: in the 2011 Tor exit-node post, the
+  `tor.infosecurity.ch` link pointed to a spam site (`prostosale.com`). The original target is restored.
+- **Encoding fixed.** Mojibake (double-encoded UTF-8) in the 2007 Italian post and the 2009/08 archive
+  page is repaired.
+- Post-2018 Wayback captures show that a third-party restore was served on the domain in 2023, with
+  copies of external documents at root paths. Those paths are excluded from the inventory.
+- Not restored: two posts the author deleted before 2017. They exist only in 2010 captures:
+  "Licensed by Israel Ministry of Defense? How things really works!" and "SIP VoIP firewall
+  differencies…". Recovering them from Wayback is possible if wanted.
 
-## 3. URL preservation on GitHub Pages
+## SEO, multilingual, LLM
 
-GitHub Pages is a plain static host, so every old URL must map to a real file:
+- Every indexable page gets:
+  - a unique `<title>`, `meta description` and self `canonical`
+  - `robots` with `max-image-preview:large`
+  - the correct `lang` (the translations used `it-x-mtfrom-en`; `iw` is mapped to `he`)
+  - `content-language`
+  - `hreflang` alternates plus `x-default`, for all languages in which the page exists
+  - Open Graph and Twitter card tags (generated `og-image.png`)
+  - JSON-LD: `BlogPosting` (author Person with `sameAs`, dates, keywords, `translationOfWork` for
+    translations), `WebSite` + `Blog` + `Person` on the home page, `CollectionPage` for archives,
+    `ProfilePage` for the author page, `BreadcrumbList`.
+- Post pages: the post title is the `h1`; the site title becomes a styled `div` with the same look.
+- Non-content pages (redirect stubs, 2008 WordPress placeholder pages, crawler junk) are `noindex`.
+- `sitemap.xml`: 809 URLs with `xhtml:link` hreflang alternates, `lastmod` on posts.
+- `robots.txt`: allows everything, lists AI crawlers explicitly, and points to the sitemap.
+- `llms.txt` (index with a summary of every post), `llms-full.txt` (full text of all posts) and
+  `<post>/index.md` (clean Markdown per post, linked with `rel=alternate type=text/markdown`).
+- IndexNow key file at `/<key>.txt`, plus `scripts/indexnow.py`.
+- New post `/20260917/infosecurity-ch-restored/` in EN, IT, DE and FR, with the author's links. It is on
+  the home pages, in Recent Posts and in the feed.
 
-| Old URL shape | How it is served |
-|---------------|------------------|
-| `/page.html` | file `site/page.html` |
-| `/dir/` | file `site/dir/index.html` |
-| `/dir` (no slash) | Pages auto-301s to `/dir/` when `site/dir/` exists |
-| `/page` (no extension) | file `site/page.html` (Pages resolves it) |
-| `/page.php`, `/page.asp`, … | **not served as HTML** by Pages (wrong MIME / download). Use `site/page.php/index.html` → Pages 301s `/page.php` to `/page.php/` |
-| `/?p=123`, `/index.php?id=x` | query strings are ignored by Pages → client-side redirect map in `index.html`/`404.html` (`scripts/` will generate it) |
-| URLs that changed/disappeared | `404.html` JS redirect map (`site/redirects.json`), plus a meta-refresh stub file where the path is known |
+## DNS (EuroDNS) — current state 2026-09-17
 
-Notes:
-- Paths are **case-sensitive** on Pages; if the old server was case-insensitive,
-  add duplicates/redirect stubs for the variants seen in the inventory.
-- `site/.nojekyll` disables Jekyll so files/dirs starting with `_` are published.
-- Old `http://` links and `www.` host: Pages redirects `www` ↔ apex automatically
-  once the custom domain is set and both DNS records exist; HTTPS is enforced.
+- Apex `A 3.69.105.74`; wildcard `*.infosecurity.ch A 3.69.105.74`; wildcard TXT (SPF).
+- `www A 69.89.27.218`.
+- MX: Google Workspace. TXT: SPF + google-site-verification. No CAA.
 
-`scripts/wayback_inventory.py` builds the authoritative list of old URLs
-(from the Wayback CDX API) and `scripts/check_urls.py` fails if any of them
-does not resolve to a file in `site/`. CI runs the check on every push.
-
-## 4. DNS cut-over (EuroDNS) — last step, only after the site is verified on github.io
-
-Current state (2026-09-16): apex `A 3.69.105.74`, `www A 69.89.27.218`,
-MX = Google Workspace, TXT = SPF + google-site-verification.
-
-**Do not touch MX, SPF, or the TXT records** — email for @infosecurity.ch depends on them.
-
-Change only:
+Records to set (leave MX, SPF and google-site-verification untouched):
 
 ```
 infosecurity.ch.      A     185.199.108.153
@@ -65,14 +90,13 @@ infosecurity.ch.      AAAA  2606:50c0:8003::153
 www.infosecurity.ch.  CNAME fpietrosanti.github.io.
 ```
 
-Then add `site/CNAME` containing `infosecurity.ch`, set the custom domain in
-repo Settings → Pages, verify the domain for the account (TXT
-`_github-pages-challenge-fpietrosanti`), and enable "Enforce HTTPS".
+- Remove the old apex `A 3.69.105.74` and `www A 69.89.27.218` (a CNAME cannot coexist with an A record).
+- Remove the wildcard `*` A record: GitHub advises against wildcard DNS.
+- GitHub domain verification is a TXT record `_github-pages-challenge-fpietrosanti` with the value
+  shown in GitHub → Settings → Pages → Add a domain. It overrides the wildcard TXT.
+- `site/CNAME` contains `infosecurity.ch`. After DNS propagates, enable **Enforce HTTPS** in the repo's Pages settings.
 
-## Preview caveat
-
-Before the custom domain is set, Pages serves the repo at
-`https://fpietrosanti.github.io/infosecurity-ch/` (sub-path), so root-relative
-links (`/foo`) will look broken there. Verify locally with
-`python -m http.server 8000 -d site` (root = `/`, like the final domain), and
-use the github.io URL only to confirm the deploy works.
+After cut-over: run the "IndexNow ping" workflow. Add the site to Google Search Console (the
+domain is already verified via TXT) and to Bing Webmaster Tools (import from GSC), then submit
+`https://infosecurity.ch/sitemap.xml` there. Optionally do the same in Yandex Webmaster, Baidu
+Ziyuan and Naver Search Advisor.

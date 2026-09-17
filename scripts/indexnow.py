@@ -1,0 +1,42 @@
+"""Submit every sitemap URL to IndexNow (Bing, Yandex, Seznam, Naver, Yep, ...).
+
+Run once after the DNS cut-over, and again after large content changes.
+The key file site/<key>.txt must be live at https://infosecurity.ch/<key>.txt.
+
+Usage: python scripts/indexnow.py
+"""
+
+import json
+import re
+import sys
+import urllib.request
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from build_site import BASE, INDEXNOW_KEY  # noqa: E402
+
+
+def main() -> int:
+    sitemap = (ROOT / "site" / "sitemap.xml").read_text(encoding="utf-8")
+    urls = re.findall(r"<loc>([^<]+)</loc>", sitemap)
+    payload = {
+        "host": BASE.removeprefix("https://"),
+        "key": INDEXNOW_KEY,
+        "keyLocation": f"{BASE}/{INDEXNOW_KEY}.txt",
+        "urlList": urls,
+    }
+    req = urllib.request.Request(
+        "https://api.indexnow.org/indexnow",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json; charset=utf-8"},
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=60) as r:
+        print(f"IndexNow: HTTP {r.status} for {len(urls)} URLs")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

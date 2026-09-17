@@ -1,28 +1,27 @@
 # infosecurity.ch
 
-Restoration of the 2018 **infosecurity.ch** website from its Web Archive copy,
-republished as a static site on GitHub Pages with the original URLs preserved.
+Restoration of **infosecurity.ch**, the 2007–2017 blog of Fabio (naif) Pietrosanti, from its
+Web Archive copy. It is published as a static site on GitHub Pages at <https://infosecurity.ch>,
+and every original URL still works.
 
 ## Layout
 
 | Path | Purpose |
 |------|---------|
-| `site/` | The published website (deployed as-is by GitHub Actions) |
-| `archive/` | Raw Wayback download, untouched (git-ignored, kept locally only) |
-| `scripts/wayback_inventory.py` | Lists every URL the archive knows for the domain → `docs/url-inventory.txt` |
-| `scripts/check_urls.py` | Verifies every inventoried URL resolves to a file in `site/` |
-| `docs/RESTORE.md` | Restoration plan, URL-preservation rules, DNS cut-over |
+| `archive/` | Raw Wayback download, untouched (git-ignored; source zip `infosecurity.ch_fabio_infosecurity.ch_cymlmjpzq5_backup.zip`) |
+| `content/` | Hand-written additions: restoration post (EN/IT/DE/FR), historical PGP key |
+| `scripts/build_site.py` | `archive/` + `content/` → `site/` (deterministic, wipes `site/`) |
+| `scripts/check_urls.py` | Fails if any historical URL in `docs/url-inventory.txt` is not served (runs in CI) |
+| `scripts/indexnow.py` | Submits the sitemap to IndexNow (also the manual "IndexNow ping" workflow) |
+| `site/` | Generated website, deployed as-is by `.github/workflows/pages.yml` |
+| `docs/RESTORE.md` | What the build does, decisions, DNS setup |
+| `docs/wayback-cdx-2026-09-17.txt` | Wayback CDX listing of every captured URL (source of the inventory) |
 
-## Status
-
-- [x] Repository + GitHub Pages deploy pipeline
-- [ ] Receive Web Archive copy → `archive/`
-- [ ] Clean Wayback artifacts, normalize to `site/`
-- [ ] URL inventory + 100% old-URL coverage check
-- [ ] Custom domain `infosecurity.ch` (DNS on EuroDNS; **keep Google MX/SPF records**)
-
-## Local preview
+## Rebuild
 
 ```bash
+unzip -q infosecurity.ch_fabio_infosecurity.ch_cymlmjpzq5_backup.zip -d archive
+pip install beautifulsoup4 lxml markdownify pillow
+python scripts/build_site.py && python scripts/check_urls.py
 python -m http.server 8000 -d site
 ```

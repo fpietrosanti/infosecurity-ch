@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>PrivateGSM: Blackberry/iPhone/Nokia mobile voice encryption with ZRTP or SRTP/SDES | infosecurity.ch</title>
+<meta name="description" content="I absolutely avoid to use my own personal blog to make promotion of any kind of product. That time it’s not different, but i want to tell you facts about…"/>
+<link rel="canonical" href="https://infosecurity.ch/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"/>
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/>
+<meta name="author" content="Fabio Pietrosanti (naif)"/>
+<meta http-equiv="content-language" content="en"/>
+<link rel="alternate" hreflang="en" href="https://infosecurity.ch/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"/>
+<link rel="alternate" hreflang="ca" href="https://infosecurity.ch/ca/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"/>
+<link rel="alternate" hreflang="gl" href="https://infosecurity.ch/gl/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"/>
+<link rel="alternate" hreflang="hr" href="https://infosecurity.ch/hr/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"/>
+<link rel="alternate" hreflang="no" href="https://infosecurity.ch/no/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"/>
+<link rel="alternate" hreflang="sl" href="https://infosecurity.ch/sl/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"/>
+<link rel="alternate" hreflang="th" href="https://infosecurity.ch/th/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"/>
+<link rel="alternate" hreflang="zh-CN" href="https://infosecurity.ch/zh-CN/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"/>
+<link rel="alternate" hreflang="x-default" href="https://infosecurity.ch/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="infosecurity.ch"/>
+<meta property="og:title" content="PrivateGSM: Blackberry/iPhone/Nokia mobile voice encryption with ZRTP or SRTP/SDES"/>
+<meta property="og:description" content="I absolutely avoid to use my own personal blog to make promotion of any kind of product. That time it’s not different, but i want to tell you facts about…"/>
+<meta property="og:url" content="https://infosecurity.ch/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"/>
+<meta property="og:image" content="https://infosecurity.ch/wp-content/uploads/2010/10/logo-privatewave-colore.png"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:creator" content="@fpietrosanti"/>
+<meta name="twitter:title" content="PrivateGSM: Blackberry/iPhone/Nokia mobile voice encryption with ZRTP or SRTP/SDES"/>
+<meta name="twitter:description" content="I absolutely avoid to use my own personal blog to make promotion of any kind of product. That time it’s not different, but i want to tell you facts about…"/>
+<meta name="twitter:image" content="https://infosecurity.ch/wp-content/uploads/2010/10/logo-privatewave-colore.png"/>
+<meta property="article:published_time" content="2010-10-19T09:10:33+00:00"/>
+<meta property="article:author" content="https://fabio.pietrosanti.it/"/>
+<meta property="article:section" content="privacy"/>
+<meta property="article:section" content="security"/>
+<meta property="article:section" content="technology"/>
+<meta property="article:tag" content="encryption"/>
+<meta property="article:tag" content="mobile"/>
+<meta property="article:tag" content="privacy"/>
+<meta property="article:tag" content="voicesecurity"/>
+<meta property="article:tag" content="zrtp"/>
+<link rel="alternate" type="application/rss+xml" title="infosecurity.ch RSS" href="/feed.xml"/>
+<link rel="alternate" type="text/markdown" href="/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/index.md"/>
+<link rel="author" href="https://fabio.pietrosanti.it/"/>
+<link rel="me" href="https://www.linkedin.com/in/secret/"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://infosecurity.ch/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/#article","headline":"PrivateGSM: Blackberry/iPhone/Nokia mobile voice encryption with ZRTP or SRTP/SDES","description":"I absolutely avoid to use my own personal blog to make promotion of any kind of product. That time it’s not different, but i want to tell you facts about…","url":"https://infosecurity.ch/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/","mainEntityOfPage":"https://infosecurity.ch/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/","datePublished":"2010-10-19T09:10:33+00:00","dateModified":"2010-10-19T09:10:33+00:00","inLanguage":"en","author":{"@type":"Person","@id":"https://infosecurity.ch/#author","name":"Fabio Pietrosanti","alternateName":"naif","url":"https://fabio.pietrosanti.it/","sameAs":["https://fabio.pietrosanti.it/","https://www.linkedin.com/in/secret/","https://x.com/fpietrosanti","https://twitter.com/fpietrosanti","https://github.com/fpietrosanti","https://www.slideshare.net/fpietrosanti"],"knowsAbout":["Information security","Privacy","Encryption","Voice encryption","ZRTP","Lawful interception","Tor","Whistleblowing"]},"publisher":{"@id":"https://infosecurity.ch/#author"},"image":"https://infosecurity.ch/wp-content/uploads/2010/10/logo-privatewave-colore.png","isPartOf":{"@id":"https://infosecurity.ch/#blog"},"keywords":"encryption, mobile, privacy, voicesecurity, zrtp","articleSection":["privacy","security","technology"],"commentCount":2,"isAccessibleForFree":true},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://infosecurity.ch/"},{"@type":"ListItem","position":2,"name":"PrivateGSM: Blackberry/iPhone/Nokia mobile voice encryption with ZRTP or SRTP/SDES","item":"https://infosecurity.ch/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/"}]}]}</script>
+<style>
+.blogtitle{display:block;font-family:'PT+Sans&subset=latin',Helvetica,Verdana,Arial,Sans-Serif;font-size:4em;font-weight:bold;margin:0 0 0 8px}
+div.blogtitle a,div.blogtitle a:link,div.blogtitle a:visited,div.blogtitle a:hover{color:#444;background:transparent}
+h1.single-entry-title,h1.entry-title{color:#444}
+@media screen and (max-width:900px),screen and (max-device-width:480px){div.blogtitle{margin:0 0 0 -8px}}
+iframe.yt{max-width:100%}
+</style>
+<meta name="viewport" content="width=device-width"/>
+<link rel="stylesheet" type="text/css" href="../../wp-content/themes/codium-extend/style.css"/>
+<link href="https://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="../../favicon.ico"/>
+<link rel="stylesheet" id="A2A_SHARE_SAVE-css" href="../../wp-content/plugins/add-to-any/addtoany.min_ver-1.14.css" type="text/css" media="all"/>
+<script type="text/javascript" src="../../wp-includes/js/jquery/jquery_ver-1.12.4.js"></script>
+<script type="text/javascript" src="../../wp-includes/js/jquery/jquery-migrate.min_ver-1.4.1.js"></script>
+<script type="text/javascript" src="../../wp-content/plugins/add-to-any/addtoany.min_ver-1.0.js"></script>
+<link rel="prev" title="A couple of nice VPN provider" href="../../20101017/a-couple-of-nice-vpn-provider/"/>
+<link rel="next" title="Eight Epic Failure of Regulating Cryptography" href="../../20101021/eight-epic-failure-of-regulating-cryptography/"/>
+<script type="text/javascript">
+var a2a_config=a2a_config||{};a2a_config.callbacks=a2a_config.callbacks||[];a2a_config.templates=a2a_config.templates||{};
+</script>
+<script type="text/javascript" src="../../menu/page.js" async="async"></script>
+</head>
+<body class="wordpress y2017 m07 d21 h03 single postid-298 s-y2010 s-m10 s-d19 s-h10 s-category-privacy s-category-security s-category-technology s-tag-encryption s-tag-mobile s-tag-privacy s-tag-voicesecurity s-tag-zrtp s-author-naif">
+<div id="wrapperpub">
+	<div id="header">
+		<div class="dp100">	
+			<div id="blog-title" class="blogtitle"><a href="/" title="Playhouse of privacy, security, hacking, encryption, intelligence and some business stuff">Playhouse of privacy, security, hacking, encryption, intelligence and some business stuff</a></div>
+			<div class="description"> </div>
+		</div><!-- dp100 -->		
+	</div><!--  #header -->	
+</div><!--  #wrapperpub -->			
+<div class="clear"></div>
+<div id="wrapper">	
+		<div id="access">
+			<div class="menu">
+				<ul>
+					<li>
+						<a href="/" title="home" class="top_parent">HOME</a>
+					</li>
+				</ul>
+			</div>
+					<div class="menu"><ul>
+<li class="page_item page-item-8"><a href="../../author/">author &#038; blog</a></li>
+</ul></div>
+		</div><!--  #access -->	
+<div class="clear"></div>		
+	<div id="container">
+		<div id="content">
+						<div id="nav-above" class="navigation">
+				<div class="nav-previous"><a href="../../20101017/a-couple-of-nice-vpn-provider/" rel="prev"><span class="meta-nav">&laquo;</span> A couple of nice VPN provider</a></div>
+				<div class="nav-next"><a href="../../20101021/eight-epic-failure-of-regulating-cryptography/" rel="next">Eight Epic Failure of Regulating Cryptography <span class="meta-nav">&raquo;</span></a></div>
+			</div>
+			<div id="post-298" class="hentry p1 post publish author-naif category-privacy category-security category-technology tag-encryption tag-mobile tag-privacy tag-voicesecurity tag-zrtp y2010 m10 d19 h10">
+				<h1 class="single-entry-title">PrivateGSM: Blackberry/iPhone/Nokia mobile voice encryption with ZRTP or SRTP/SDES</h1>
+				<div class="linebreak"></div>
+				<div class="entry-content">
+					<p>I absolutely avoid to use my own personal blog to make promotion of any kind of product.</p>
+<p>That time it’s not different, but i want to tell you facts about products i work on without fancy marketing, but staying technical.</p>
+<p>Today, at <a href="http://www.privatewave.com/">PrivateWave</a> where i am <a href="http://linkedin.com/in/secret">CTO and co-founder</a>, we released publicly mobile VoIP encryption products for Blackberry, iPhone and Nokia:</p>
+<ul>
+<li>The 1st ever Blackberry encrypted VoIP with <a href="http://www.privatewave.com/security/security-protocols/zrtp.html">ZRTP</a> - <b>PrivateGSM VoIP Professional</b></li>
+<li>The 1st ever iPhone encrypted VoIP with <a href="http://www.privatewave.com/security/security-protocols/zrtp.html">ZRTP</a> - <b>PrivateGSM VoIP Professional</b></li>
+<li><b><span style="font-weight: normal;">The 1st ever Blackberry encrypted VoIP client with <a href="http://www.privatewave.com/security/security-protocols/srtp-sdes.html">SRTP with SDES key exchange over SIP/TLS</a> -</span> PrivateGSM VoIP Enterprise</b></li>
+</ul>
+<p style="text-align: center;"><a href="http://www.privatewave.com/"><img src="../../wp-content/uploads/2010/10/logo-privatewave-colore.png" width="229" height="47" alt="logo-privatewave-colore.png"/></a></p>
+<p>At PrivateWave we use a different approach respect to most voice encryption company out there, read our <a href="http://www.privatewave.com/security/approch.html">approach to security</a> .</p>
+<p>The relevance of this products in the technology and industry landscape can be summarized as follow:</p>
+<ul>
+<li>It’s the first voice encryption company using only standards security protocols (and we expect the market will react, as it’s clear that proprietary tech coming from the heritage of CSD cannot provide same value)</li>
+<li>It’s the first approach in voice encryption to use only open source & standard encryption engine</li>
+<li>It’s the first voice encryption approach to provide different security model using different technologies (end-to-end for <a href="http://www.privatewave.com/security/security-protocols/zrtp.html">ZRTP</a> and <a href="http://www.privatewave.com/security/security-model/end-to-site.html">end-to-site</a> for <a href="http://www.privatewave.com/security/security-protocols/srtp-sdes.html">SRTP</a>)</li>
+</ul>
+<p>Those suite of Mobile Secure Clients, designed for professional security use only using best telecommunication and security technologies, provide a high degree of protection along with good performance also in bad network conditions:</p>
+<ul>
+<li>Multiple security model: <a href="http://www.privatewave.com/security/security-model/end-to-end.html">end-to-end</a> encryption with <a href="http://www.privatewave.com/security/security-protocols/zrtp.html">ZRTP</a> and <a href="http://www.privatewave.com/security/security-model/end-to-site.html">end-to-site</a> encryption with SRTP</li>
+<li>Voice encryption</li>
+<li><a href="http://www.privatewave.com/security/security-protocols/sip-tls.html">Signaling encryption</a></li>
+<li><a href="http://www.privatewave.com/security/security-protocols/sip-tls.html"></a>Digital certificate strict checking of <a href="http://www.privatewave.com/security/security-protocols/sip-tls.html">SIP/TLS</a> (99% of voip clients does not do in-depth strict <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a> checking)</li>
+<li><a href="http://en.wikipedia.org/wiki/Adaptive_Multi-Rate_audio_codec">AMR 4.75kbit codec</a> (same technology and audio codec of standard GSM phone calls)</li>
+<li>Extremely optimized <a href="http://en.wikipedia.org/wiki/Jitter">jitter buffering</a> (It works even in GPRS and via WiFi over Satellite)</li>
+<li>Automatic always-on reconnection using <a href="https://docs.google.com/viewer?url=http://research.nokia.com/files/NRCTR2008002.pdf">Nokia Standby Techniques</a> for <b>strong battery saving</b></li>
+</ul>
+<p>The applications are:</p>
+<ul>
+<li><a href="http://www.privatewave.com/products-services/private-gsm/versions-platforms.html">PrivateGSM Professional</a> <b>- It does <a href="http://www.privatewave.com/security/security-model/end-to-end.html">end-to-end</a> encryption with <a href="http://www.privatewave.com/security/security-protocols/zrtp.html">ZRTP with ECDH384</a>, strict cache verification and addressbook integration</b></li>
+<li><a href="http://www.privatewave.com/products-services/private-gsm/versions-platforms.html">PrivateGSM Enterprise</a> - <b>It does <a href="http://www.privatewave.com/security/security-model/end-to-site.html">end-to-site</a> encryption with <a href="http://www.privatewave.com/security/security-protocols/srtp-sdes.html">SRTP with SDES key exchange over SIP/TLS</a></b></li>
+<li><a href="http://www.privatewave.com/enterprise-voip-security-suite/enterprise-solution.html">Enterprise VoIP Security Suite</a> - <a href="http://www.privatewave.com/security/pbx-security.html">Secure PBX System</a> based on Asterisk with added VoIP Firewalls</li>
+</ul>
+<p style="text-align: center;"><a href="http://www.privatewave.com/"><img src="../../wp-content/uploads/2010/10/icona-pgsm.png" width="118" height="141" alt="icona-pgsm.png"/></a></p>
+<p>The supported mobile devices are:</p>
+<ul>
+<li><a href="http://www.privatewave.com/support/mobile-devices/nokia.html">Nokia S60</a></li>
+<li><a href="http://www.privatewave.com/support/mobile-devices/iphone.html">iPhone</a> 3GS/4G with iOS 4.x</li>
+<li><a href="http://www.privatewave.com/support/mobile-devices/blackberry.html">Blackberry</a> with RIMOS 5 (several GSM models)</li>
+</ul>
+<p>Regarding <b><a href="http://www.privatewave.com/security/security-protocols/zrtp.html">ZRTP</a></b> we decided to stress and stretch all the security and paranoid feature of the protocol with some little addition:</p>
+<ul>
+<li>Use only <a href="http://en.wikipedia.org/wiki/Elliptic_curve_cryptography">Elliptic Curve Diffie Hellmann</a> (ECDH) 384bit that are part of <a href="http://en.wikipedia.org/wiki/NSA_Suite_B_Cryptography">NSA Suite-B</a> (<a href="../../20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/">No Koblitz ECDH-571 curves!</a>)</li>
+<li>Use <a href="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard">AES256</a> in CTR mode</li>
+<li>Does cache verification and key continuity</li>
+<li>Strict addressbook integration extended respect to RFC with additional paranoid checking</li>
+<li>All security warning and security error cause the call to be hangup, cache cleared and user warned to re-check ZRTP security</li>
+<li>Use <a href="http://en.wikipedia.org/wiki/Random_number_generation">Random Number Generator</a> in strict compliance with <a href="http://www.privatewave.com/security/security-protocols/random-number-generation.html">FIPS security requirements</a> by using Phisical Source of Entropy (Microphone)</li>
+</ul>
+<p>Our strict address book integration, goes beyond <b><a href="http://tools.ietf.org/html/draft-zimmermann-avt-zrtp-22">ZRTP RFC</a> <span style="font-weight: normal;">specification</span>,</b> that could be vulnerable to certain attacks when used on mobile phones because of user behavior of not to look at mobile screen.</p>
+<p>Our paranoy way of using ZRTP mitigate such conditions, we will write about this later and/or will add specific details for RFC inclusion.</p>
+<p><b><span style="font-weight: normal;">Some words on</span> PrivateGSM Professional</b> with end-to-end encryption with ZRTP</p>
+<ul>
+<li>User does not need to use the application: It’s i<a href="http://www.privatewave.com/products-services/private-gsm/blackberry-usage-mode.html">ntegrated in the phone for dialing with a secure prefix</a> putting +801 in front of the number to call</li>
+<li><b>It’s</b> <a href="http://m.privategsm.com/new-webdownload/">downloadable from the internet</a> for self trial for 15 days (most voice encryption company does not provide free download)</li>
+<li><b>Receiver is FREE</b> that means that only who make calls have to buy the application, receiver does not need to pay anything</li>
+<li>it does <b><a href="http://www.privatewave.com/security/security-protocols/rtp-traffic-obfuscation.html">Traffic Obfuscation</a></b> to <b>Bypass <a href="http://www.voip-sol.com/10-isps-and-countries-known-to-have-blocked-voip/">VoIP blocks over 2G/3G</a></b></li>
+<li>It’s <a href="http://www.privatewave.com/support/network-requirements/voip.html">very narrowband:</a> Use as little as 100Kbyte/minutes</li>
+</ul>
+<p>Read <a href="https://docs.google.com/viewer?url=http://www.privatewave.com/media/0/29101080972386/privategsm_voip_techsheet_en.pdf">technical sheet</a> there!</p>
+<p style="text-align: left;">To <a href="http://www.privatewave.com/products-services/private-gsm/try-privategsm.html">download it</a> click here and just put your phone number</p>
+<p>Those are the results of hard work of all my very skilled staff (16 persons worked on this 6 projects for 3 different platforms) on challenging technologies (voice encryption) in a difficult operating environment (dirty mobile networks and dirty mobile operating systems) for more than 2 years.</p>
+<p>I am very proud of our staff!</p>
+<p><b>What next?</b></p>
+<p>In next weeks you will see releasing of major set of documentations such as integration with asterisks, freeswitch and other Security Enabled PBX, along with some exciting other security technology news that i am sure will be noticed ;)</p>
+<p>It has been an hard work and more have to be done but i am confident that the security and opensource community will like such products and our transparent approach also with open important releases and open source integration that make a very politically neutral (backdoor free) technology.</p>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list" data-a2a-url="https://infosecurity.ch/20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/" data-a2a-title="PrivateGSM: Blackberry/iPhone/Nokia mobile voice encryption with ZRTP or SRTP/SDES"><a class="a2a_button_facebook" href="https://www.addtoany.com/add_to/facebook?linkurl=https%3A%2F%2Finfosecurity.ch%2F20101019%2Fprivategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes%2F&amp;linkname=PrivateGSM%3A%20Blackberry%2FiPhone%2FNokia%20mobile%20voice%20encryption%20with%20ZRTP%20or%20SRTP%2FSDES" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_button_twitter" href="https://www.addtoany.com/add_to/twitter?linkurl=https%3A%2F%2Finfosecurity.ch%2F20101019%2Fprivategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes%2F&amp;linkname=PrivateGSM%3A%20Blackberry%2FiPhone%2FNokia%20mobile%20voice%20encryption%20with%20ZRTP%20or%20SRTP%2FSDES" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"></a></div></div>					
+					<div class="clear"></div>
+					 				</div>
+				<div class="entry-meta">
+					<span class="meta-prep meta-prep-author">Posted on</span> <a href="../../20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/" title="9:10 am" rel="bookmark"><span class="entry-date">19 October 2010</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../../author/naif/" title="View all posts by naif">naif</a></span>.					This entry was posted in <a href="../../category/privacy/" rel="category tag">Privacy</a>, <a href="../../category/business/security/" rel="category tag">security</a>, <a href="../../category/privacy/technology/" rel="category tag">technology</a> and tagged <a href="../../tag/encryption/" rel="tag">encryption</a>, <a href="../../tag/mobile/" rel="tag">mobile</a>, <a href="../../tag/privacy/" rel="tag">Privacy</a>, <a href="../../tag/voicesecurity/" rel="tag">voicesecurity</a>, <a href="../../tag/zrtp/" rel="tag">zrtp</a>. Bookmark the <a href="../../20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/" title="Permalink to PrivateGSM: Blackberry/iPhone/Nokia mobile voice encryption with ZRTP or SRTP/SDES" rel="bookmark">permalink</a>.	
+									</div>
+				<div class="clear"></div>
+			</div><!-- .post -->
+			<div id="nav-below" class="navigation">
+				<div class="nav-previous"><a href="../../20101017/a-couple-of-nice-vpn-provider/" rel="prev"><span class="meta-nav">&laquo;</span> A couple of nice VPN provider</a></div>
+				<div class="nav-next"><a href="../../20101021/eight-epic-failure-of-regulating-cryptography/" rel="next">Eight Epic Failure of Regulating Cryptography <span class="meta-nav">&raquo;</span></a></div>
+			</div>
+			<div id="comments">
+				<div id="comments-list" class="comments">
+					<h3><span>2</span> Comments</h3>
+					<div id="comments-nav-above" class="comments-navigation">
+					</div>
+   <li id="comment-262" class="comment c c-y2011 c-m01 c-d20 c-h11 alt">
+      <span class="count">1</span>
+      <div class="comment-author vcard">
+        <img alt="" src="../../avatar/e65beb9ad2690de050ac0506aa175672-s-48-d-mm-r-g.jpg"  class="avatar avatar-48 photo" height="48" width="48"/>		<div class="fn"><a href="http://na/" rel="external nofollow" class="url">Interested user</a></div>       </div>
+      <div class="comment-meta">20 January 2011 - 10:00 am <span class="meta-sep">|</span> <a href="#comment-262" title="Permalink to this comment">Permalink</a></div>
+	  <div class="clear"></div>	
+      <p>You should add your client to the list at<br/>
+<a href="http://en.wikipedia.org/wiki/Comparison_of_VoIP_software#Mobile_phones" rel="nofollow">http://en.wikipedia.org/wiki/Comparison_of_VoIP_software#Mobile_phones</a></p>
+<p>Unfortunately, 800 EUR per year is too expensive for private use&#8230;</p>
+      <div class="reply">
+               </div>
+</li><!-- #comment-## -->
+   <li id="comment-321" class="comment c1 c-y2011 c-m09 c-d30 c-h13">
+      <span class="count">2</span>
+      <div class="comment-author vcard">
+        <img alt="" src="../../avatar/4fddeeb6bcd21651b52c317a80d2e013-s-48-d-mm-r-g.jpg"  class="avatar avatar-48 photo" height="48" width="48"/>		<div class="fn">Faruk</div>       </div>
+      <div class="comment-meta">30 September 2011 - 12:43 pm <span class="meta-sep">|</span> <a href="#comment-321" title="Permalink to this comment">Permalink</a></div>
+	  <div class="clear"></div>	
+      <p>Could you please extend your sentence &#8220;Receiver is FREE that means that only who make calls have to buy the application, receiver does not need to pay anything&#8221;. </p>
+<p>Are you proposing end users a free passive zrtp engine for key exchange for incoming calls on media line. Otherwise how zrtp protocol make handshake for dhparts, commit vs. with other end?</p>
+      <div class="reply">
+               </div>
+</li><!-- #comment-## -->
+					<div id="comments-nav-below" class="comments-navigation">
+					</div>
+				</div><!-- #comments-list .comments -->
+	<div id="respond" class="comment-respond"><p class="comments-closed" style="padding:1em;background:#f4f4f4;border-left:4px solid #888">Comments are closed. This blog is a historical archive, restored on 17 September 2026 (<a href="/20260917/infosecurity-ch-restored/">read more</a>).</p></div><!-- #respond -->
+			</div><!-- #comments -->
+		</div><!-- #content -->
+	</div><!-- #container -->
+<div id="primary" class="sidebar">
+	<ul class="xoxo">
+			<li id="search-2" class="widget widget_search"><div class="widgetblock"><form role="search" method="get" id="searchform" class="searchform" action="https://duckduckgo.com/"><input type="hidden" name="sites" value="infosecurity.ch"/>
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="q" id="s"/>
+					<input type="submit" id="searchsubmit" value="Search"/>
+				</div>
+			</form>
+			</div></li>
+			<li id="text-3" class="widget widget_text"><div class="widgetblock">
+				<div class="widgettitleb"><h3 class="widgettitle">About</h3></div>
+			<div class="textwidget">My interest in espionage/counterespionage, hacking, privacy, security, technology and sometime business and marketing stuff related to security world. BLOG IS IN ENGLISH. TRANSLATIONS ARE AUTOMATIC.
+</div>
+			</div></li>
+			<li id="twitter-1" class="widget widget_twitter"><div class="widgetblock">
+				<div class="widgettitleb"><h3 class="widgettitle"><a href="http://twitter.com/fpietrosanti" class="twitter_title_link">Twitter</a></h3></div>
+<ul class="twitter"><li>No public Twitter messages.</li></ul>
+			</div></li>
+			<li id="recent-posts-2" class="widget widget_recent_entries"><div class="widgetblock">		
+				<div class="widgettitleb"><h3 class="widgettitle">Recent Posts</h3></div>
+		<ul>
+					<li>
+				<a href="/20260917/infosecurity-ch-restored/">infosecurity.ch is back online: the blog has been restored</a>
+						</li>
+					<li>
+				<a href="../../20170610/low-liability-reduced-abuses-tor-exit-nodes/">Low Liability - Reduced Abuses Tor Exit Nodes</a>
+						</li>
+					<li>
+				<a href="../../20110411/rfc-6189-zrtp-is-finally-a-standard/">RFC 6189: ZRTP is finally a standard!</a>
+						</li>
+					<li>
+				<a href="../../20110223/progress-for-gsm-cracking-in-freiburg-university/">Progress for GSM cracking in Freiburg university</a>
+						</li>
+					<li>
+				<a href="../../20110124/my-tor-exit-node-experience-trying-to-filter-out-noisy-traffic/">My TOR exit node experience trying to filter out noisy traffic</a>
+						</li>
+					<li>
+				<a href="../../20110123/tetra-hacking-is-coming-osmocomtetra/">TETRA hacking is coming: OsmocomTETRA</a>
+						</li>
+					<li>
+				<a href="../../20110115/government-2-0-open-data-and-wikileaks/">Government 2.0, Open Data and WikiLeaks</a>
+						</li>
+					<li>
+				<a href="../../20110112/zorg-new-c-and-java-zrtp-implementation-public-release/">ZORG, new C++ and Java ZRTP implementation public release</a>
+						</li>
+					<li>
+				<a href="../../20101025/encrypted-mobile-to-landline-phone-calls-with-asterisk-1-8/">Encrypted mobile to landline phone calls with Asterisk 1.8</a>
+						</li>
+					<li>
+				<a href="../../20101021/eight-epic-failure-of-regulating-cryptography/">Eight Epic Failure of Regulating Cryptography</a>
+						</li>
+					<li>
+				<a href="../../20101019/privategsm-blackberryiphonenokia-mobile-voice-encryption-with-zrtp-or-srtpsdes/">PrivateGSM: Blackberry/iPhone/Nokia mobile voice encryption with ZRTP or SRTP/SDES</a>
+						</li>
+					<li>
+				<a href="../../20101017/a-couple-of-nice-vpn-provider/">A couple of nice VPN provider</a>
+						</li>
+					<li>
+				<a href="../../20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/">Not every elliptic curve is the same: trough on ECC security</a>
+						</li>
+					<li>
+				<a href="../../20100925/essor-european-secure-software-defined-radio-sdr/">ESSOR, European Secure Software Defined Radio (SDR)</a>
+						</li>
+					<li>
+				<a href="../../20100912/product-management-and-organization/">Product management and organization</a>
+						</li>
+					<li>
+				<a href="../../20100910/remotely-intercepting-snom-voip-phones/">Remotely intercepting snom VoIP phones</a>
+						</li>
+					<li>
+				<a href="../../20100826/voice-communication-security-workshop/">Voice communication security workshop</a>
+						</li>
+					<li>
+				<a href="../../20100815/27c3-ccc-congress-cfp-we-come-in-peace/">27C3 - CCC Congress CFP: We come in peace</a>
+						</li>
+					<li>
+				<a href="../../20100723/gsm-cracking-in-penetration-test-methodologies-osstmm/">GSM cracking in penetration test methodologies (OSSTMM) ?</a>
+						</li>
+					<li>
+				<a href="../../20100719/snake-oil-security-claims-on-crypto-security-product/">Snake-oil security claims on crypto security product</a>
+						</li>
+					<li>
+				<a href="../../20100717/web2-0-privacy-leak-in-mobile-apps/">Web2.0 privacy leak in Mobile apps</a>
+						</li>
+				</ul>
+			</div></li>
+			</ul>
+</div><!-- #primary .sidebar -->
+<div id="secondary" class="sidebar">
+	<ul class="xoxo">
+		</ul>
+</div><!-- #secondary .sidebar --><div id="footer">
+</div>
+<div id="footerlink"><div class="alignright"><p>Archive restored on 17 September 2026 &middot; <a href="/20260917/infosecurity-ch-restored/">about the restoration</a> &middot; <a href="https://fabio.pietrosanti.it/" rel="author">Fabio Pietrosanti</a></p><p>Proudly powered by <a href="http://www.wordpress.org/">Wordpress</a> and designed by <a href="http://www.code-2-reduction.fr/codium_extend/" title="code reduction" target="blank">code reduction</a></p></div><div class="clear"></div></div></div></body>
+</html>
