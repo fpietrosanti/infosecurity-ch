@@ -13,9 +13,8 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "scripts"))
-
-from build_site import BASE, INDEXNOW_KEY  # noqa: E402
+BASE = "https://infosecurity.ch"
+INDEXNOW_KEY = next(p.stem for p in (ROOT / "site").glob("*.txt") if len(p.stem) == 32)
 
 
 def main() -> int:
