@@ -141,3 +141,25 @@ PDFs, slide decks, closed forums, Facebook/X and paywalled archives. URLs with a
 (for example `/?p=123`) always answer 200 on the restored site because the home page resolves
 them in JavaScript, so such targets would have to be checked against `site/redirects.json`
 instead; none appeared among the backlinks found here.
+
+## Actions taken (2026-10-06)
+
+- **No redirect was needed.** All 14 target paths on `infosecurity.ch` return 200, so the restored
+  site already satisfies every inbound link found. `scripts/check_links.py` and `scripts/check_urls.py`
+  keep it that way in CI.
+- **The 4 dead targets are not on this site**: they are files that lived on
+  `privacyresearch.infosecurity.ch`, the Tor exit-node research VPS, linked once from tor-talk in
+  October 2011. That hostname has no DNS record today, so nothing served from this repo can answer
+  it. Two choices, both needing Fabio:
+  1. leave it — one 2011 mailing-list message points at four shell scripts and two text files;
+  2. restore it — recover the files from Wayback (rate-limited at the time of writing, retry later),
+     put them in a small second repo with `CNAME = privacyresearch.infosecurity.ch` (GitHub Pages
+     allows one custom domain per repository, so the main repo cannot serve that hostname), and add
+     a `CNAME privacyresearch → fpietrosanti.github.io` record at EuroDNS.
+- **No scraped mirror found.** Searches for the blog's tagline and for the title of the most-copied
+  post return only infosecurity.ch itself, i.e. no third party is holding traffic on a stale copy.
+- **Outreach**: see [OUTREACH.md](OUTREACH.md). Six contactable publishers, ready-to-send drafts in
+  EN/DE/IT, nothing sent.
+- **Not done, on purpose**: visiting these sites with a spoofed `Referer` pointing at the linked
+  article. That is referrer spam — it pollutes other people's analytics and is treated as abuse.
+  Each page here was fetched once, with an ordinary User-Agent and no `Referer`.
