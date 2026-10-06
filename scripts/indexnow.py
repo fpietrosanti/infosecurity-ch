@@ -30,11 +30,20 @@ def main() -> int:
     req = urllib.request.Request(
         "https://api.indexnow.org/indexnow",
         data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json; charset=utf-8"},
+        headers={
+            "Content-Type": "application/json; charset=utf-8",
+            "User-Agent": "infosecurity.ch-indexnow/1.0 (+https://infosecurity.ch/)",
+        },
         method="POST",
     )
-    with urllib.request.urlopen(req, timeout=60) as r:
-        print(f"IndexNow: HTTP {r.status} for {len(urls)} URLs")
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            print(f"IndexNow: HTTP {r.status} for {len(urls)} URLs")
+    except urllib.error.HTTPError as e:
+        # 403 usually means the caller's IP is blocked (GitHub Actions runners are),
+        # not a bad key: run this script from a normal network instead.
+        print(f"IndexNow refused the submission: HTTP {e.code} {e.reason}")
+        return 1
     return 0
 
 
