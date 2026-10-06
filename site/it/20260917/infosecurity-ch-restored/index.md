@@ -14,6 +14,8 @@ Tutto è com'era: gli articoli che ho scritto tra il 2007 e il 2017 su privacy, 
 
 Ciò che è cambiato è sotto il cofano: HTTPS, una sitemap aggiornata con le versioni linguistiche, dati strutturati, un [feed RSS](/feed.xml) e versioni leggibili dalle macchine degli articoli per motori di ricerca e assistenti AI ([llms.txt](/llms.txt)).
 
+Un articolo del 2010 che era sparito dal blog prima del 2017 è tornato, recuperato da una copia del 2016: [Licensed by Israel Ministry of Defense? How things really works!](/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/), insieme alle traduzioni automatiche archiviate con esso. Un secondo articolo, del 24 settembre 2010 sui firewall SIP/VoIP, non è mai stato archiviato ed è perduto.
+
 ### Dove trovarmi oggi
 
 - Home page: [fabio.pietrosanti.it](https://fabio.pietrosanti.it/)

@@ -44,9 +44,16 @@ Restored on 2026-09-17 from a Wayback download (1,653 files): WordPress 4.8, the
   page is repaired.
 - Post-2018 Wayback captures show that a third-party restore was served on the domain in 2023, with
   copies of external documents at root paths. Those paths are excluded from the inventory.
-- Not restored: two posts the author deleted before 2017. They exist only in 2010 captures:
-  "Licensed by Israel Ministry of Defense? How things really works!" and "SIP VoIP firewall
-  differencies…". Recovering them from Wayback is possible if wanted.
+- **Recovered post** (2026-10-06): "Licensed by Israel Ministry of Defense? How things really works!"
+  (`/20100129/…works/`) was missing from the download — it disappeared from the blog between October 2016
+  and June 2017. It is restored from the 2016-10-23 capture, which already used the same theme, plus the
+  four archived automatic translations (be, fi, hi, tr; every other language was only a redirect to
+  Google Translate at crawl time). Captures live in `content/recovered/`, shortlink `/?p=106` works again,
+  and the typo'd URL variant redirects to it. Because the 2017/2018 listing pages never contained it, the
+  post is reachable from the sitemap, the feed, llms.txt and the restoration post, not from the archives.
+- **Lost post**: "SIP VoIP firewall differencies between telephony and security world"
+  (`/20100924/…/`, post id 264) was already deleted by 2016; Wayback only holds the 2013 redirect and a
+  2016 "page not found", so there is no content anywhere to restore.
 
 ## SEO, multilingual, LLM
 
@@ -62,7 +69,9 @@ Restored on 2026-09-17 from a Wayback download (1,653 files): WordPress 4.8, the
     `ProfilePage` for the author page, `BreadcrumbList`.
 - Post pages: the post title is the `h1`; the site title becomes a styled `div` with the same look.
 - Non-content pages (redirect stubs, 2008 WordPress placeholder pages, crawler junk) are `noindex`.
-- `sitemap.xml`: 809 URLs with `xhtml:link` hreflang alternates, `lastmod` on posts.
+- `sitemap.xml` is a **sitemap index** pointing to `sitemap-posts.xml` (76), `sitemap-pages.xml` (50)
+  and `sitemap-translations-N.xml` (688, chunks of 5,000). Each URL carries `lastmod` (post date, or the
+  newest post listed on an archive page), `xhtml:link` hreflang alternates and `image:image`.
 - `robots.txt`: allows everything, lists AI crawlers explicitly, and points to the sitemap.
 - `llms.txt` (index with a summary of every post), `llms-full.txt` (full text of all posts) and
   `<post>/index.md` (clean Markdown per post, linked with `rel=alternate type=text/markdown`).

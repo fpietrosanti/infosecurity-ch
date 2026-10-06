@@ -84,9 +84,14 @@ NEW_POST = {
     },
 }
 
-# Posts removed by the author before the 2017/2018 site: intentionally not restored.
+# Shortlinks of recovered posts (their captures carry no rel=shortlink).
+EXTRA_SHORTLINKS = {"106": "/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/"}
+
 # Legacy URL -> current URL (static redirect stubs).
 LEGACY_REDIRECTS = {
+    "/20100129/licensed-by-israel-ministry-of-defense-how-things-really-work/": (
+        "/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/"
+    ),
     "/20100908/remotely-intercepting-snom-voip-phones/": "/20100910/remotely-intercepting-snom-voip-phones/",
     "/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-/": "/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/",
     "/index.php/": "/",
@@ -234,6 +239,10 @@ def map_archive():
                 pages.append(("/" + rel + "/", rel + "/index.html", src))
             else:
                 files.append((rel, src))
+    # posts recovered from Wayback (missing from the download): content/recovered/<url>/index.html
+    for src in sorted((CONTENT / "recovered").rglob("index.html")):
+        rel = src.relative_to(CONTENT / "recovered").as_posix()
+        pages.append(("/" + rel[: -len("index.html")], rel, src))
     return pages, files
 
 
@@ -307,6 +316,7 @@ def collect_metadata(pages):
             "categories": cats,
             "tags": tags,
             "comments": len(re.findall(r'<li id="comment-\d+"', s)),
+            "body_class": (re.search(r'<body class="([^"]*)"', s) or ["", ""])[1],
         }
     for url, p in posts.items():
         y, mo, d, _slug = POST_RE.match(url).groups()
@@ -314,7 +324,8 @@ def collect_metadata(pages):
         if iso:
             iso = re.sub(r"\+0000$", "+00:00", iso)
         else:
-            iso = f"{y}-{mo}-{d}T12:00:00+00:00"
+            hour = (re.search(r"\bs-h(\d{2})\b", p.get("body_class", "")) or [None, "12"])[1]
+            iso = f"{y}-{mo}-{d}T{hour}:00:00+00:00"
         p["iso"] = iso
         img = re.search(r'<img[^>]+src="([^"]+)"', p["body"])
         p["image"] = urllib.parse.urljoin(BASE + url, img.group(1)) if img else None
@@ -667,6 +678,58 @@ def rss(items, self_url):
     return "\n".join(out)
 
 
+SITEMAP_CHUNK = 5000
+
+
+def sitemap_urlset(entries) -> str:
+    out = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
+        ' xmlns:xhtml="http://www.w3.org/1999/xhtml"'
+        ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
+    ]
+    for url, lastmod, alts, _kind, image in entries:
+        out.append("<url>")
+        out.append(f"<loc>{esc(BASE + url)}</loc>")
+        if lastmod:
+            out.append(f"<lastmod>{lastmod}</lastmod>")
+        for code, href in alts:
+            out.append(f'<xhtml:link rel="alternate" hreflang="{code}" href="{esc(BASE + href)}"/>')
+        if image:
+            out.append(f"<image:image><image:loc>{esc(image)}</image:loc></image:image>")
+        out.append("</url>")
+    out += ["</urlset>", ""]
+    return "\n".join(out)
+
+
+def write_sitemaps(sitemap):
+    """A sitemap index with one sitemap per content type, translations in chunks."""
+    posts, pages, translations = [], [], []
+    for entry in sorted(sitemap, key=lambda x: (split_lang(x[0])[0] != "en", x[0])):
+        lang, _key = split_lang(entry[0])
+        if lang != "en":
+            translations.append(entry)
+        elif entry[3] in ("post", "newpost"):
+            posts.append(entry)
+        else:
+            pages.append(entry)
+    files = [("sitemap-posts.xml", posts), ("sitemap-pages.xml", pages)]
+    chunks = [translations[i : i + SITEMAP_CHUNK] for i in range(0, len(translations), SITEMAP_CHUNK)] or [[]]
+    for i, chunk in enumerate(chunks, 1):
+        files.append((f"sitemap-translations-{i}.xml", chunk))
+    index = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for name, entries in files:
+        write(SITE / name, sitemap_urlset(entries))
+        lastmod = max((e[1] for e in entries if e[1]), default=RESTORE_DATE)
+        index.append(f"<sitemap><loc>{BASE}/{name}</loc><lastmod>{lastmod}</lastmod></sitemap>")
+    index += ["</sitemapindex>", ""]
+    write(SITE / "sitemap.xml", "\n".join(index))
+    print(f"sitemap index: {len(files)} sitemaps ({len(posts)} posts, {len(pages)} pages, {len(translations)} translations)")
+
+
 def to_markdown(title, url, iso, tags, body_html, lang="en"):
     md = markdownify(body_html, heading_style="ATX", bullets="-")
     md = re.sub(r"\n{3,}", "\n\n", md).strip()
@@ -725,6 +788,7 @@ def main():
     SITEMAP_2017 = load_sitemap_2017()
     pages, files = map_archive()
     posts, shortlinks, outgoing_map = collect_metadata(pages)
+    shortlinks.update(EXTRA_SHORTLINKS)
     print(f"{len(pages)} pages, {len(files)} files, {len(posts)} posts, {len(LANGS)} languages")
 
     # static files
@@ -925,7 +989,10 @@ def main():
             s = insert_footer_note(s)
         write(dst, s)
         if indexable:
-            sitemap.append((url, sitemap_lastmod, meta["alternates"]))
+            if not sitemap_lastmod and kind in ("list", "page"):
+                newest = re.search(r'<abbr class="published" title="(\d{4}-\d{2}-\d{2})', s)
+                sitemap_lastmod = newest.group(1) if newest else None
+            sitemap.append((url, sitemap_lastmod, meta["alternates"], kind, meta.get("image")))
 
     # ---- new restoration post (from the newest EN post as template) ----
     newest_url = max(posts, key=lambda u: posts[u]["iso"])
@@ -1006,7 +1073,7 @@ def main():
         page = re.sub(r'<body class="[^"]*"', '<body class="wordpress single postid-restored"', page, count=1)
         write(SITE / purl.strip("/") / "index.html", page)
         write(SITE / purl.strip("/") / "index.md", to_markdown(title, purl, NEW_POST["iso"], [], body, lang))
-        sitemap.append((purl, RESTORE_DATE, alts))
+        sitemap.append((purl, RESTORE_DATE, alts, "post", BASE + OG_IMAGE))
         new_items[lang] = {"url": purl, "title": title, "iso": NEW_POST["iso"], "description": desc, "body": body}
 
     # "next" link on the previously newest post (EN)
@@ -1103,20 +1170,7 @@ def main():
     write(SITE / "llms.txt", "\n".join(llms))
 
     # ---- sitemap ----
-    sm = [
-        '<?xml version="1.0" encoding="UTF-8"?>',
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
-    ]
-    for u, lastmod, alts in sorted(sitemap, key=lambda x: (split_lang(x[0])[0] != "en", x[0])):
-        sm.append("<url>")
-        sm.append(f"<loc>{esc(BASE + u)}</loc>")
-        if lastmod:
-            sm.append(f"<lastmod>{lastmod}</lastmod>")
-        for code, href in alts:
-            sm.append(f'<xhtml:link rel="alternate" hreflang="{code}" href="{esc(BASE + href)}"/>')
-        sm.append("</url>")
-    sm += ["</urlset>", ""]
-    write(SITE / "sitemap.xml", "\n".join(sm))
+    write_sitemaps(sitemap)
 
     # ---- robots.txt ----
     ai_bots = [
@@ -1174,10 +1228,8 @@ EXCLUDED_URLS = [
     (r"^/cgi-sys/", "hosting provider suspended page"),
     (r"^/\.well-known/", "server probe, never existed"),
     (r"(%20| )https?:/", "broken link in old posts; 404.html redirects to the external URL"),
-    (r"^/\?p=106$", "shortlink of a post deleted by the author before 2017"),
     (r"^/Tor-Scan-", "one-off 2011 scan dump, not captured"),
     (r"^/sea/docs/", "external document captured by mistake"),
-    (r"/licensed-by-israel-ministry-of-defense-how-things-really-work", "post deleted by the author before 2017"),
     (r"/sip-voip-firewall-differencies-between-telephony-and-security-world", "post deleted by the author before 2017"),
     (r"^/\d{8}/[^/]+/\d+/?$", "WordPress comment-page artefact"),
 ]

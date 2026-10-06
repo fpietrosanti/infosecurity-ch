@@ -14,6 +14,8 @@ Everything is as it was: the posts I wrote between 2007 and 2017 on privacy, sec
 
 What changed is under the hood: HTTPS, an up-to-date sitemap with language alternates, structured data, an [RSS feed](/feed.xml) and machine-readable versions of the posts for search engines and AI assistants ([llms.txt](/llms.txt)).
 
+One 2010 post that had vanished from the blog before 2017 is back, recovered from a 2016 snapshot: [Licensed by Israel Ministry of Defense? How things really works!](/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/), together with the automatic translations that were archived with it. A second one, published on 24 September 2010 about SIP/VoIP firewalls, was never archived and is lost.
+
 ### Where to find me today
 
 - Home page: [fabio.pietrosanti.it](https://fabio.pietrosanti.it/)

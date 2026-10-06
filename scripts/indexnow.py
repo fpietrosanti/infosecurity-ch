@@ -18,8 +18,9 @@ INDEXNOW_KEY = next(p.stem for p in (ROOT / "site").glob("*.txt") if len(p.stem)
 
 
 def main() -> int:
-    sitemap = (ROOT / "site" / "sitemap.xml").read_text(encoding="utf-8")
-    urls = re.findall(r"<loc>([^<]+)</loc>", sitemap)
+    urls = []
+    for f in sorted((ROOT / "site").glob("sitemap-*.xml")):
+        urls += re.findall(r"<loc>([^<]+)</loc>", f.read_text(encoding="utf-8"))
     payload = {
         "host": BASE.removeprefix("https://"),
         "key": INDEXNOW_KEY,

@@ -14,6 +14,8 @@ Tout est comme avant : les articles que j'ai écrits entre 2007 et 2017 sur la v
 
 Ce qui a changé se trouve sous le capot : HTTPS, un sitemap à jour avec les versions linguistiques, des données structurées, un [flux RSS](/feed.xml) et des versions lisibles par machine des articles pour les moteurs de recherche et les assistants IA ([llms.txt](/llms.txt)).
 
+Un article de 2010 qui avait disparu du blog avant 2017 est de retour, récupéré depuis une copie de 2016 : [Licensed by Israel Ministry of Defense? How things really works!](/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/), avec les traductions automatiques archivées en même temps. Un second article, du 24 septembre 2010 sur les pare-feu SIP/VoIP, n'a jamais été archivé et est perdu.
+
 ### Où me trouver aujourd'hui
 
 - Page d'accueil : [fabio.pietrosanti.it](https://fabio.pietrosanti.it/)

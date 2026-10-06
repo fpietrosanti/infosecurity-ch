@@ -1,17 +1,12 @@
 / http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 //wp-admin//admin-ajax.php	malformed crawler URL
-/20100129/licensed-by-israel-ministry-of-defense-how-things-really-work/	post deleted by the author before 2017
-/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/	post deleted by the author before 2017
-/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/feed/	post deleted by the author before 2017
 /20100924/sip-voip-firewall-differencies-between-telephony-and-security-world/	post deleted by the author before 2017
-/?p=106	shortlink of a post deleted by the author before 2017
 /Tor-Scan-20-12-2011_00_30.out.gz	one-off 2011 scan dump, not captured
 /ar/20100826/voice-communication-security-workshop/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /ar/category/privacy/interception/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /ar/tag/civilrights/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /ar/tag/voicesecurity/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /author/naif/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
-/be/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/	post deleted by the author before 2017
 /be/20100826/voice-communication-security-workshop/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /be/20110223/progress-for-gsm-cracking-in-freiburg-university/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /be/category/business/ideas/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
@@ -74,7 +69,6 @@
 /fa/category/privacy/interception/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /fa/tag/civilrights/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /fa/tag/voicesecurity/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
-/fi/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/	post deleted by the author before 2017
 /fi/20100826/voice-communication-security-workshop/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /fi/category/business/ideas/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /fi/category/privacy/interception/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
@@ -98,7 +92,6 @@
 /gl/category/privacy/interception/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /gl/tag/civilrights/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /gl/tag/voicesecurity/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
-/hi/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/	post deleted by the author before 2017
 /hi/20100826/voice-communication-security-workshop/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /hi/20110223/progress-for-gsm-cracking-in-freiburg-university/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /hi/category/business/ideas/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
@@ -256,7 +249,6 @@
 /tl/category/privacy/interception/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /tl/tag/civilrights/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /tl/tag/voicesecurity/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
-/tr/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/	post deleted by the author before 2017
 /tr/20100826/voice-communication-security-workshop/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /tr/20110223/progress-for-gsm-cracking-in-freiburg-university/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL
 /tr/category/business/ideas/ http://www.ks.uni-freiburg.de/download/misc/practical_exercise_a51.pdf	broken link in old posts; 404.html redirects to the external URL

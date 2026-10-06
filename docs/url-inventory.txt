@@ -59,6 +59,9 @@
 /2010/10/
 /20100126/o3b-networks-a-new-satellite-broadband-approach/
 /20100126/o3b-networks-a-new-satellite-broadband-approach/feed/
+/20100129/licensed-by-israel-ministry-of-defense-how-things-really-work/
+/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/
+/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/feed/
 /20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/
 /20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/feed/
 /20100201/answer-of-securstar-gmbh-on-the-infosecurityguardnotrax-case-absolutely-unreasonable/
@@ -146,6 +149,7 @@
 /?p=103
 /?p=104
 /?p=105
+/?p=106
 /?p=107
 /?p=157
 /?p=160
@@ -243,6 +247,7 @@
 /avatar/d2e3ce5aa1a3e3ad3a8ed4c97bbfe8e1_s_48_d_mm_r_g.jpg
 /avatar/d64a4d33fe1c940a1a939631ab5d1b74_s_48_d_/avatar/ad516503a11cd5ca435acc9bb6523536_s_48_r_G.jpg
 /be/
+/be/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/
 /be/20100826/voice-communication-security-workshop/
 /be/20100826/voice-communication-security-workshop/_www.ks.uni-freiburg.de/download/misc/practical_exercise_a51/
 /be/20100826/voice-communication-security-workshop/page/2/
@@ -451,6 +456,7 @@
 /feed/
 /feed/atom/
 /feed/rss/
+/fi/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/
 /fi/20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/
 /fi/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/
 /fi/20100601/who-extract-oil-in-iran-business-and-un-sanction-together/
@@ -527,6 +533,7 @@
 /gl/tag/voicesecurity/
 /gl/tag/voicesecurity/page/2/
 /hi/
+/hi/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/
 /hi/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/
 /hi/20100826/voice-communication-security-workshop/
 /hi/20100826/voice-communication-security-workshop/_www.ks.uni-freiburg.de/download/misc/practical_exercise_a51/
@@ -1119,6 +1126,7 @@
 /tl/tag/voicesecurity/
 /tl/tag/voicesecurity/page/2/
 /tr/
+/tr/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/
 /tr/20100826/voice-communication-security-workshop/
 /tr/20100826/voice-communication-security-workshop/_www.ks.uni-freiburg.de/download/misc/practical_exercise_a51/
 /tr/20100826/voice-communication-security-workshop/page/2/

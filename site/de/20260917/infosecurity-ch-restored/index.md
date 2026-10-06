@@ -14,6 +14,8 @@ Alles ist wie früher: die Beiträge, die ich zwischen 2007 und 2017 über Priva
 
 Geändert hat sich die Technik dahinter: HTTPS, eine aktuelle Sitemap mit Sprachversionen, strukturierte Daten, ein [RSS-Feed](/feed.xml) und maschinenlesbare Fassungen der Beiträge für Suchmaschinen und KI-Assistenten ([llms.txt](/llms.txt)).
 
+Ein Beitrag von 2010, der vor 2017 aus dem Blog verschwunden war, ist zurück, wiederhergestellt aus einer Momentaufnahme von 2016: [Licensed by Israel Ministry of Defense? How things really works!](/20100129/licensed-by-israel-ministry-of-defense-how-things-really-works/), samt der damit archivierten automatischen Übersetzungen. Ein zweiter Beitrag vom 24. September 2010 über SIP/VoIP-Firewalls wurde nie archiviert und ist verloren.
+
 ### Wo Sie mich heute finden
 
 - Homepage: [fabio.pietrosanti.it](https://fabio.pietrosanti.it/)
