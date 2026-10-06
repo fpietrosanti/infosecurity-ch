@@ -26,6 +26,6 @@ Ein Beitrag von 2010, der vor 2017 aus dem Blog verschwunden war, ist zurück, w
 
 ### Kontakt
 
-Am schnellsten erreichen Sie mich per Nachricht auf [LinkedIn](https://www.linkedin.com/in/secret/); weitere Angaben finden Sie auf meiner [Homepage](https://fabio.pietrosanti.it/). Der hier in den Blog-Jahren veröffentlichte öffentliche PGP-Schlüssel ist weiterhin unter </publickey.asc> abrufbar.
+Am schnellsten erreichen Sie mich per Nachricht auf [LinkedIn](https://www.linkedin.com/in/secret/); weitere Angaben finden Sie auf meiner [Homepage](https://fabio.pietrosanti.it/).
 
 — Fabio (naif) Pietrosanti

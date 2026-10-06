@@ -441,6 +441,18 @@ def cleanup(s: str, outgoing_map: dict) -> str:
         return f.replace(">", '><input type="hidden" name="sites" value="infosecurity.ch"/>', 1)
 
     s = re.sub(r'<form[^>]*id="searchform".*?</form>', search, s, flags=re.S)
+    # subresources must be HTTPS or the browser blocks them on an HTTPS page.
+    # Outbound <a> links keep the URL the post was written with.
+    for _ in range(4):  # a tag can carry several of these attributes
+        s, n = re.subn(
+            r'(<(?:img|script|iframe|embed|source|video|audio|link)\b[^>]*?\b(?:src|href|srcset|poster|data-src)=")http://',
+            r"\1https://",
+            s,
+            flags=re.I,
+        )
+        if not n:
+            break
+    s = re.sub(r'(\bsrcset="[^"]*?)http://', r"\1https://", s)
     if "\u00c3" in s:
         s = fix_mojibake(s)
     # Known mojibake in the 2009/08 archive page
@@ -1071,6 +1083,9 @@ def main():
         )
         page = page[:start] + block + page[end:]
         page = re.sub(r'<body class="[^"]*"', '<body class="wordpress single postid-restored"', page, count=1)
+        # the template is a depth-2 post page, so its "../../" links mean the site root;
+        # make them root-relative or they break under /<lang>/20260917/...
+        page = page.replace('="../../', '="/')
         write(SITE / purl.strip("/") / "index.html", page)
         write(SITE / purl.strip("/") / "index.md", to_markdown(title, purl, NEW_POST["iso"], [], body, lang))
         sitemap.append((purl, RESTORE_DATE, alts, "post", BASE + OG_IMAGE))

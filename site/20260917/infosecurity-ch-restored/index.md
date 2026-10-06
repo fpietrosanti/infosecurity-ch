@@ -26,6 +26,6 @@ One 2010 post that had vanished from the blog before 2017 is back, recovered fro
 
 ### Contacts
 
-The quickest way to reach me is a message on [LinkedIn](https://www.linkedin.com/in/secret/); more details are on my [home page](https://fabio.pietrosanti.it/). The PGP public key published here during the blog years is still available at </publickey.asc>.
+The quickest way to reach me is a message on [LinkedIn](https://www.linkedin.com/in/secret/); more details are on my [home page](https://fabio.pietrosanti.it/).
 
 — Fabio (naif) Pietrosanti

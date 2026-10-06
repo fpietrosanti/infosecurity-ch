@@ -24,6 +24,8 @@ jobs:
           python-version: "3.12"
       - name: Check old URLs are all served
         run: python scripts/check_urls.py
+      - name: Check internal links and mixed content
+        run: python scripts/check_links.py --fail-on-mixed
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
