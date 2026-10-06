@@ -1,52 +1,111 @@
-"""Submit every sitemap URL to IndexNow (Bing, Yandex, Seznam, Naver, Yep, ...).
+"""Submit sitemap URLs to IndexNow — nightly rolling slices (Bing, Yandex, ...).
 
-Run after the DNS cut-over, and again after large content changes.
-The key file site/<key>.txt must be live at https://infosecurity.ch/<key>.txt.
+Richiesta 2026-10-06: "segmentare l'invio IndexNow e farlo a rotazione ogni
+notte a chunk". Stesso pattern collaudato su mxmap.it: ogni notte si
+sottomette UNA fetta (``--per-day``, default 30 URL) scelta in modo
+deterministico (giorni-dall-epoca modulo numero di fette), con precedenza
+alle pagine cambiate di recente (lastmod ≤3 giorni). Con ~814 URL il ciclo
+completo dura ~27 notti (≈ mensile, come mxmap.it). Nota sulla composizione
+(dall'altra sessione, 2026-10-06): 688 URL sono traduzioni statiche SENZA
+lastmod (contenuto 2013-14, non cambia) — il ritmo mensile le tocca "di
+rado" com'è giusto; i 76 post + 50 pagine portano lastmod, quindi ogni
+modifica vera li fa risalire subito via delta-first. ``--full`` resta per i grandi cambi
+(submission unica, cap 10k da protocollo).
 
-Resilience notes (2026-10-06 incident): the first run from GitHub Actions
-got a bare HTTP 403. That was NOT the runner's IP being blocked (the
-mxmap.it IndexNow job runs daily from the same runner pool with HTTP 200):
-it was the known COLD-START validation race — the key file had gone live
-two minutes earlier, api.indexnow.org fetched a stale edge and briefly
-cached the refusal. The exact same payload returned 200 from another
-network minutes later. Hence this script now:
-  1. pre-flights the keyLocation itself (clear, actionable error if the
-     key is not being served correctly — e.g. DNS or deploy regressions);
-  2. treats a first 403 as the cold-start case: waits 90s and retries once;
-  3. treats 429/5xx as transient (warning, exit 0 — rerun the manual
-     workflow later) and persistent 403/400/422 as configuration errors.
+La struttura dei sitemap NON è cablata: si legge ``site/sitemap.xml`` come
+INDEX e si seguono i figli che dichiara (robusto ai restyling del sitemap;
+fallback al glob ``sitemap-*.xml`` se l'index mancasse).
 
-Usage: python scripts/indexnow.py
+Resilienza (incidente 2026-10-06): il primo run da GitHub Actions prese un
+403 secco. NON era l'IP dei runner bloccato (l'IndexNow di mxmap.it gira
+ogni giorno dagli stessi runner con HTTP 200; lo stesso payload prese 200 da
+un'altra rete pochi minuti dopo): era la race di validazione a freddo —
+chiave pubblicata 2 minuti prima del ping, l'engine ha pescato un edge
+stantio e cacheato il rifiuto. Quindi: (1) preflight della keyLocation con
+errore parlante se la chiave non è servita (regressioni DNS/deploy);
+(2) primo 403 → attesa 90s e un retry; (3) 429/5xx = transiente (warning,
+exit 0 — il cron ritenta domani); 400/403/422 persistenti = errore di
+configurazione (exit 1).
+
+Usage:
+  python scripts/indexnow.py [--per-day 100] [--full] [--dry-run]
+Wired in .github/workflows/indexnow.yml (cron notturno + dispatch manuale).
 """
 
+import argparse
 import json
 import re
 import sys
 import time
 import urllib.error
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+SITE = ROOT / "site"
 BASE = "https://infosecurity.ch"
-INDEXNOW_KEY = next(p.stem for p in (ROOT / "site").glob("*.txt") if len(p.stem) == 32)
+INDEXNOW_KEY = next(p.stem for p in SITE.glob("*.txt") if len(p.stem) == 32)
 KEY_LOCATION = f"{BASE}/{INDEXNOW_KEY}.txt"
-UA = "infosecurity.ch-indexnow/1.0 (+https://infosecurity.ch/)"
+UA = "infosecurity.ch-indexnow/2.0 (+https://infosecurity.ch/)"
+
+_URL_RE = re.compile(
+    r"<url>\s*<loc>\s*([^<\s]+)\s*</loc>(?:\s*<lastmod>\s*([^<\s]+)\s*</lastmod>)?"
+)
+_LOC_RE = re.compile(r"<loc>\s*([^<\s]+)\s*</loc>")
+
+
+def collect_urls() -> dict[str, str]:
+    """{url: lastmod} dai sitemap COMMITTATI, guidati dall'index."""
+    index = SITE / "sitemap.xml"
+    children: list[Path] = []
+    if index.exists():
+        xml = index.read_text(encoding="utf-8")
+        if "<sitemapindex" in xml:
+            for loc in _LOC_RE.findall(xml):
+                rel = loc.removeprefix(BASE).lstrip("/")
+                p = SITE / rel
+                if p.exists():
+                    children.append(p)
+                else:
+                    print(f"::warning::figlio dichiarato nell'index ma assente: {rel}")
+        else:
+            children = [index]  # urlset piatto
+    if not children:  # fallback: index assente/vuoto
+        children = sorted(SITE.glob("sitemap-*.xml"))
+    pages: dict[str, str] = {}
+    for child in children:
+        for loc, lm in _URL_RE.findall(child.read_text(encoding="utf-8")):
+            pages[loc] = lm or ""
+    return pages
+
+
+def todays_batch(pages: dict[str, str], per_day: int) -> tuple[int, int, int, list[str]]:
+    """Delta-first (lastmod ≤3 giorni) + fetta rotante deterministica."""
+    urls = sorted(pages)
+    cutoff = date.fromordinal(date.today().toordinal() - 3).isoformat()
+    delta = [u for u in urls if pages[u] >= cutoff]
+    chunks = max(1, -(-len(urls) // per_day))  # ceil
+    idx = date.today().toordinal() % chunks
+    rotation = urls[idx * per_day : (idx + 1) * per_day]
+    batch = list(dict.fromkeys(delta + rotation))[:9500]
+    return idx, chunks, len(delta), batch
 
 
 def preflight_key() -> None:
-    """The engine validates keyLocation before accepting a submission; if WE
-    cannot fetch our own key, submitting is pointless — fail with the real
-    reason instead of a mystery 403."""
     req = urllib.request.Request(KEY_LOCATION, headers={"User-Agent": UA})
     try:
         with urllib.request.urlopen(req, timeout=30) as r:
             body = r.read().decode("utf-8", errors="ignore").strip()
     except Exception as e:  # noqa: BLE001
-        sys.exit(f"keyLocation unreachable ({KEY_LOCATION}): {e} — DNS or deploy problem, not an IndexNow one")
+        sys.exit(
+            f"keyLocation irraggiungibile ({KEY_LOCATION}): {e} — problema DNS/deploy, non di IndexNow"
+        )
     if body != INDEXNOW_KEY:
-        sys.exit(f"keyLocation serves wrong content ({body[:40]!r}) — stale deploy or wrong file at {KEY_LOCATION}")
-    print(f"preflight ok: {KEY_LOCATION} serves the key")
+        sys.exit(
+            f"keyLocation serve contenuto sbagliato ({body[:40]!r}) — deploy stantio o file errato"
+        )
+    print(f"preflight ok: {KEY_LOCATION} serve la chiave")
 
 
 def submit(urls: list[str]) -> int:
@@ -70,32 +129,48 @@ def submit(urls: list[str]) -> int:
 
 
 def main() -> int:
-    urls = []
-    for f in sorted((ROOT / "site").glob("sitemap-*.xml")):
-        urls += re.findall(r"<loc>([^<]+)</loc>", f.read_text(encoding="utf-8"))
-    if not urls:
-        sys.exit("no URLs found in site/sitemap-*.xml")
-    if len(urls) > 10000:
-        sys.exit(f"{len(urls)} URLs exceed the 10k-per-submission IndexNow limit: split needed")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--per-day", type=int, default=30)
+    ap.add_argument("--full", action="store_true", help="tutto il sitemap in un colpo")
+    ap.add_argument("--dry-run", action="store_true")
+    args = ap.parse_args()
+
+    pages = collect_urls()
+    if not pages:
+        sys.exit("nessun URL nei sitemap sotto site/ — build incompleta?")
+
+    if args.full:
+        batch = sorted(pages)
+        if len(batch) > 10000:
+            sys.exit(f"{len(batch)} URL oltre il limite 10k per submission: usa --per-day")
+        print(f"[indexnow] FULL: {len(batch)} URL in una submission")
+    else:
+        idx, chunks, n_delta, batch = todays_batch(pages, args.per_day)
+        print(
+            f"[indexnow] URL nel sitemap: {len(pages)} | delta (≤3gg): {n_delta} "
+            f"| fetta {idx + 1}/{chunks} | batch: {len(batch)} URL: "
+            f"{batch[0]} … {batch[-1]}"
+        )
+
+    if args.dry_run:
+        print("[indexnow] dry-run: nessuna submission")
+        return 0
 
     preflight_key()
 
-    status = submit(urls)
+    status = submit(batch)
     if status == 403:
-        # Known cold-start: the engine may briefly cache a failed key
-        # validation right after the key file is first published.
-        print("::warning::HTTP 403 — cold-start validation race? Retrying once in 90s")
+        print("::warning::HTTP 403 — possibile race di validazione: retry tra 90s")
         time.sleep(90)
-        status = submit(urls)
+        status = submit(batch)
 
     if status in (200, 202):
-        print(f"IndexNow: HTTP {status} for {len(urls)} URLs (shared with all IndexNow engines)")
+        print(f"IndexNow: HTTP {status} per {len(batch)} URL (condivisi con tutti i motori IndexNow)")
         return 0
     if status in (400, 403, 422):
-        print(f"IndexNow refused the submission: HTTP {status} — configuration problem (key/host/payload), see preflight above")
+        print(f"IndexNow rifiuta: HTTP {status} — configurazione (chiave/host/payload), vedi preflight")
         return 1
-    # 429 / 5xx: transient on their side; this is a manual workflow — rerun later.
-    print(f"::warning::IndexNow transient HTTP {status} — rerun the workflow later")
+    print(f"::warning::IndexNow HTTP {status} transiente — il cron ritenta domani")
     return 0
 
 

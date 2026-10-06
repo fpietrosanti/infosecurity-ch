@@ -1,18 +1,53 @@
 name: IndexNow ping
 
-# Manual: run after the DNS cut-over and after big content changes.
+# Invio A ROTAZIONE, ogni notte, a chunk (richiesta 2026-10-06): il cron
+# sottomette una fetta da --per-day URL (default 30 → ciclo completo ~27
+# notti su ~814 URL, ≈ mensile), delta-first sulle pagine con lastmod recente. Il
+# dispatch manuale resta per i grandi cambi: spunta "full" per sottomettere
+# l'intero sitemap in un colpo (cap 10k del protocollo).
+#
+# Lo script legge site/sitemap.xml come INDEX (robusto ai restyling dei
+# sitemap), fa il preflight della keyLocation e ritenta una volta il 403
+# cold-start. 429/5xx = warning verde (il cron ritenta domani).
+
 on:
+  schedule:
+    - cron: '23 2 * * *' # ogni notte 02:23 UTC
   workflow_dispatch:
+    inputs:
+      per_day:
+        description: "URL per fetta (default 30)"
+        required: false
+        default: "30"
+      full:
+        description: "Invia TUTTO il sitemap in un colpo (dopo grandi cambi)"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
 
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
 jobs:
   ping:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python scripts/indexnow.py
+      - name: Submit rolling slice (or full on request)
+        env:
+          PER_DAY: ${{ github.event.inputs.per_day || '30' }}
+          FULL: ${{ github.event.inputs.full || 'false' }}
+        run: |
+          if [ "$FULL" = "true" ]; then
+            python scripts/indexnow.py --full
+          else
+            python scripts/indexnow.py --per-day "$PER_DAY"
+          fi
