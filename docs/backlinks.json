@@ -1,0 +1,497 @@
+[
+  {
+    "linking_url": "https://www.theregister.com/security/2010/02/01/voice-crypto-fails-spark-astroturf-claims/1395226",
+    "site": "theregister.com",
+    "date": "2010-02-01",
+    "targets": [
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/"
+    ],
+    "anchor": "linked from \"a post containing screenshots and evidence\" in the SecurStar/Notrax astroturf story",
+    "link_type": "href",
+    "topic": "SecurStar / Notrax / infosecurityguard",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 200
+    }
+  },
+  {
+    "linking_url": "https://forums.theregister.com/forum/all/2010/01/29/voice_crypto_cracks/",
+    "site": "forums.theregister.com",
+    "date": "2010-01-30",
+    "targets": [
+      "http://infosecurity.ch/20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/"
+    ],
+    "anchor": "comment by Fabio Pietrosanti, \"Analysis of the research project results\"",
+    "link_type": "plain-text URL",
+    "topic": "SecurStar / Notrax / infosecurityguard",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch/20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch/20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/": 200
+    }
+  },
+  {
+    "linking_url": "https://seclists.org/fulldisclosure/2010/Jan/634",
+    "site": "seclists.org",
+    "date": "2010-01-31",
+    "targets": [
+      "http://infosecurity.ch"
+    ],
+    "anchor": "signature of \"Evidence of fake security research from SecurStar GmbH\"",
+    "link_type": "href",
+    "topic": "SecurStar / Notrax / infosecurityguard",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200
+    }
+  },
+  {
+    "linking_url": "https://seclists.org/fulldisclosure/2010/Jan/635",
+    "site": "seclists.org",
+    "date": "2010-01-31",
+    "targets": [
+      "http://infosecurity.ch",
+      "http://infosecurity.ch/20100201/dishonest-security-the-securstart-gmbh-case/",
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/"
+    ],
+    "anchor": "Thor (Hammer of God) quoting naif's post and both blog write-ups",
+    "link_type": "href",
+    "topic": "SecurStar / Notrax / infosecurityguard",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch": 301,
+      "http://infosecurity.ch/20100201/dishonest-security-the-securstart-gmbh-case/": 301,
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200,
+      "http://infosecurity.ch/20100201/dishonest-security-the-securstart-gmbh-case/": 200,
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 200
+    }
+  },
+  {
+    "linking_url": "https://seclists.org/fulldisclosure/2010/Jan/636",
+    "site": "seclists.org",
+    "date": "2010-01-31",
+    "targets": [
+      "http://infosecurity.ch"
+    ],
+    "anchor": "naif's reply in the SecurStar thread (signature)",
+    "link_type": "href",
+    "topic": "SecurStar / Notrax / infosecurityguard",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200
+    }
+  },
+  {
+    "linking_url": "https://seclists.org/fulldisclosure/2010/Jan/637",
+    "site": "seclists.org",
+    "date": "2010-01-31",
+    "targets": [
+      "http://infosecurity.ch",
+      "http://infosecurity.ch/20100201/dishonest-security-the-securstart-gmbh-case/",
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/"
+    ],
+    "anchor": "Thor (Hammer of God) final reply, quoted thread with both URLs",
+    "link_type": "href",
+    "topic": "SecurStar / Notrax / infosecurityguard",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch": 301,
+      "http://infosecurity.ch/20100201/dishonest-security-the-securstart-gmbh-case/": 301,
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200,
+      "http://infosecurity.ch/20100201/dishonest-security-the-securstart-gmbh-case/": 200,
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 200
+    }
+  },
+  {
+    "linking_url": "https://seclists.org/fulldisclosure/2010/Dec/340",
+    "site": "seclists.org",
+    "date": "2010-12-15",
+    "targets": [
+      "http://infosecurity.ch"
+    ],
+    "anchor": "\"An idea of leaking alternative to wikileaks\" (openleak proposal), signature",
+    "link_type": "href",
+    "topic": "WikiLeaks / openleak / LeakDirectory",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200
+    }
+  },
+  {
+    "linking_url": "https://seclists.org/fulldisclosure/2010/Dec/341",
+    "site": "seclists.org",
+    "date": "2010-12-15",
+    "targets": [
+      "http://infosecurity.ch"
+    ],
+    "anchor": "Christian Sciberras' reply quoting naif's signature",
+    "link_type": "href",
+    "topic": "WikiLeaks / openleak / LeakDirectory",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200
+    }
+  },
+  {
+    "linking_url": "https://seclists.org/fulldisclosure/2010/Dec/344",
+    "site": "seclists.org",
+    "date": "2010-12-15",
+    "targets": [
+      "http://infosecurity.ch"
+    ],
+    "anchor": "Andriy Tereshchenko's reply quoting naif's signature",
+    "link_type": "href",
+    "topic": "WikiLeaks / openleak / LeakDirectory",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200
+    }
+  },
+  {
+    "linking_url": "https://mgpf.it/2010/01/31/debunking-infosecurityguard-com-identity.html",
+    "site": "mgpf.it (Matteo Flora)",
+    "date": "2010-01-31",
+    "targets": [
+      "http://infosecurity.ch",
+      "http://infosecurity.ch/20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/",
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/"
+    ],
+    "anchor": "\"Fabio has updated his blog with a very strong opinioned\" plus reference list [1]/[5]",
+    "link_type": "markdown link",
+    "topic": "SecurStar / Notrax / infosecurityguard",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch": 301,
+      "http://infosecurity.ch/20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/": 301,
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200,
+      "http://infosecurity.ch/20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/": 200,
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 200
+    }
+  },
+  {
+    "linking_url": "https://www.heise.de/news/Hickhack-um-Test-fuer-Handyverschluesselung-919951.html",
+    "site": "heise.de",
+    "date": "2010-02-02",
+    "targets": [
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/"
+    ],
+    "anchor": "German news story on the test dispute, links the evidence post",
+    "link_type": "href",
+    "topic": "SecurStar / Notrax / infosecurityguard",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 200
+    }
+  },
+  {
+    "linking_url": "https://www.csoonline.com/article/524574/malware-cybercrime-accusations-fly-over-voice-encryption-hack.html",
+    "site": "csoonline.com",
+    "date": "2010-02-02",
+    "targets": [
+      "https://infosecurity.ch/"
+    ],
+    "anchor": "\"Accusations Fly Over Voice Encryption Hack\", links Pietrosanti's blog",
+    "link_type": "href",
+    "topic": "SecurStar / Notrax / infosecurityguard",
+    "self_owned": false,
+    "status": {
+      "https://infosecurity.ch/": 200
+    },
+    "status_after_redirect": {
+      "https://infosecurity.ch/": 200
+    }
+  },
+  {
+    "linking_url": "https://www.connect-professional.de/security/anschuldigung-voice-security-test-ist-ein-fake-261135.html",
+    "site": "connect-professional.de",
+    "date": "2010-02-03",
+    "targets": [
+      "http://infosecurity.ch/20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/",
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/"
+    ],
+    "anchor": "\"Anschuldigung: Voice-Security-Test ist ein Fake\", links both analyses",
+    "link_type": "href",
+    "topic": "SecurStar / Notrax / infosecurityguard",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch/20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/": 301,
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch/20100130/about-the-voice-encryption-analysis-phonecrypt-can-be-intercepted-serious-security-evaluation-criteria/": 200,
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 200
+    }
+  },
+  {
+    "linking_url": "https://www.schneier.com/blog/archives/2010/05/end-to-end_encr.html",
+    "site": "schneier.com",
+    "date": "2010-05-27",
+    "targets": [
+      "http://infosecurity.ch"
+    ],
+    "anchor": "comment thread on \"End-to-End Encrypted Cell Phone Calls\"",
+    "link_type": "href",
+    "topic": "voice encryption / ZRTP",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200
+    }
+  },
+  {
+    "linking_url": "http://voipsa.org/pipermail/voipsec_voipsa.org/2010-December/003225.html",
+    "site": "voipsa.org (VOIPSEC list)",
+    "date": "2010-12-02",
+    "targets": [
+      "http://infosecurity.ch",
+      "http://infosecurity.ch/20100719/snake-oil-security-claims-on-crypto-security-product/"
+    ],
+    "anchor": "\"what's called in the crypto world Snake Oil Encryption\"",
+    "link_type": "href",
+    "topic": "snake-oil crypto",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch": 301,
+      "http://infosecurity.ch/20100719/snake-oil-security-claims-on-crypto-security-product/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200,
+      "http://infosecurity.ch/20100719/snake-oil-security-claims-on-crypto-security-product/": 200
+    }
+  },
+  {
+    "linking_url": "https://voipsec.voipsa.narkive.com/1ffR4hfz/what-of-voip-apps-or-devices-actually-use-srtp-or-zrtp-to-encrypt-audio-calls",
+    "site": "narkive.com (VOIPSEC mirror)",
+    "date": "2010-12-02",
+    "targets": [
+      "http://infosecurity.ch/20100719/snake-oil-security-claims-on-crypto-security-product/"
+    ],
+    "anchor": "mirror of the same VOIPSEC message, URL in the message body",
+    "link_type": "plain-text URL",
+    "topic": "snake-oil crypto",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch/20100719/snake-oil-security-claims-on-crypto-security-product/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch/20100719/snake-oil-security-claims-on-crypto-security-product/": 200
+    }
+  },
+  {
+    "linking_url": "https://lists.torproject.org/pipermail/tor-talk/2011-October/021558.html",
+    "site": "lists.torproject.org",
+    "date": "2011-10-02",
+    "targets": [
+      "http://privacyresearch.infosecurity.ch/blocktest/blacklist-stat.sh",
+      "http://privacyresearch.infosecurity.ch/blocktest/blacklisted.txt",
+      "http://privacyresearch.infosecurity.ch/blocktest/blocklist-stat.txt",
+      "http://privacyresearch.infosecurity.ch/blocktest/extract-blacklisted-ip.sh"
+    ],
+    "anchor": "exit-policy blacklist scripts and data hosted on privacyresearch.infosecurity.ch",
+    "link_type": "href",
+    "topic": "Tor exit node research",
+    "self_owned": false,
+    "status": {
+      "http://privacyresearch.infosecurity.ch/blocktest/blacklist-stat.sh": 0,
+      "http://privacyresearch.infosecurity.ch/blocktest/blacklisted.txt": 0,
+      "http://privacyresearch.infosecurity.ch/blocktest/blocklist-stat.txt": 0,
+      "http://privacyresearch.infosecurity.ch/blocktest/extract-blacklisted-ip.sh": 0
+    },
+    "status_after_redirect": {
+      "http://privacyresearch.infosecurity.ch/blocktest/blacklist-stat.sh": 0,
+      "http://privacyresearch.infosecurity.ch/blocktest/blacklisted.txt": 0,
+      "http://privacyresearch.infosecurity.ch/blocktest/blocklist-stat.txt": 0,
+      "http://privacyresearch.infosecurity.ch/blocktest/extract-blacklisted-ip.sh": 0
+    }
+  },
+  {
+    "linking_url": "https://news.ycombinator.com/item?id=2441296",
+    "site": "news.ycombinator.com",
+    "date": "2011-04-13",
+    "targets": [
+      "http://infosecurity.ch/20110411/rfc-6189-zrtp-is-finally-a-standard/"
+    ],
+    "anchor": "HN submission \"RFC 6189: ZRTP is finally a standard\"",
+    "link_type": "href",
+    "topic": "voice encryption / ZRTP",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch/20110411/rfc-6189-zrtp-is-finally-a-standard/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch/20110411/rfc-6189-zrtp-is-finally-a-standard/": 200
+    }
+  },
+  {
+    "linking_url": "https://news.ycombinator.com/item?id=4245756",
+    "site": "news.ycombinator.com",
+    "date": "2012-07-15",
+    "targets": [
+      "http://infosecurity.ch/20110123/tetra-hacking-is-coming-osmocomtetra/"
+    ],
+    "anchor": "HN submission \"TETRA hacking is coming: OsmocomTETRA\"",
+    "link_type": "href",
+    "topic": "TETRA / GSM",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch/20110123/tetra-hacking-is-coming-osmocomtetra/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch/20110123/tetra-hacking-is-coming-osmocomtetra/": 200
+    }
+  },
+  {
+    "linking_url": "https://news.ycombinator.com/item?id=11664592",
+    "site": "news.ycombinator.com",
+    "date": "2016-05-10",
+    "targets": [
+      "http://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/"
+    ],
+    "anchor": "HN submission \"Not every elliptic curve is the same: trough on ECC security\"",
+    "link_type": "href",
+    "topic": "ECC / cryptography",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/": 200
+    }
+  },
+  {
+    "linking_url": "https://news.ycombinator.com/item?id=12225808",
+    "site": "news.ycombinator.com",
+    "date": "2016-08-04",
+    "targets": [
+      "http://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/"
+    ],
+    "anchor": "HN re-submission of the same 2010 post, \"trough on ECC security\"",
+    "link_type": "href",
+    "topic": "ECC / cryptography",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch/20100926/not-every-elliptic-curve-is-the-same-trough-on-ecc-security/": 200
+    }
+  },
+  {
+    "linking_url": "https://personaldemocracy.com/speaker/fabio-pietrosanti/",
+    "site": "personaldemocracy.com",
+    "date": null,
+    "targets": [
+      "http://infosecurity.ch"
+    ],
+    "anchor": "speaker biography, \"His blog is Infosecurity\"",
+    "link_type": "href",
+    "topic": "author profile",
+    "self_owned": false,
+    "status": {
+      "http://infosecurity.ch": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200
+    }
+  },
+  {
+    "linking_url": "https://in.linkedin.com/posts/secret_playhouse-of-privacy-security-hacking-activity-7043337008152293376-4vpQ",
+    "site": "linkedin.com",
+    "date": "2023-03-19",
+    "targets": [
+      "https://Infosecurity.ch"
+    ],
+    "anchor": "public post sharing the blog's \"Playhouse of privacy, security, hacking\" tagline",
+    "link_type": "href",
+    "topic": "social share",
+    "self_owned": false,
+    "status": {
+      "https://Infosecurity.ch": 200
+    },
+    "status_after_redirect": {
+      "https://Infosecurity.ch": 200
+    }
+  },
+  {
+    "linking_url": "http://fabio.pietrosanti.it/",
+    "site": "fabio.pietrosanti.it",
+    "date": null,
+    "targets": [
+      "http://infosecurity.ch",
+      "http://infosecurity.ch/",
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/",
+      "http://infosecurity.ch/20110124/my-tor-exit-node-experience-trying-to-filter-out-noisy-traffic/",
+      "http://infosecurity.ch/publickey.asc"
+    ],
+    "anchor": "author's own homepage: blog link, SecurStar evidence, Tor exit-node post, PGP key",
+    "link_type": "href",
+    "topic": "author homepage",
+    "self_owned": true,
+    "status": {
+      "http://infosecurity.ch": 301,
+      "http://infosecurity.ch/": 301,
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 301,
+      "http://infosecurity.ch/20110124/my-tor-exit-node-experience-trying-to-filter-out-noisy-traffic/": 301,
+      "http://infosecurity.ch/publickey.asc": 301
+    },
+    "status_after_redirect": {
+      "http://infosecurity.ch": 200,
+      "http://infosecurity.ch/": 200,
+      "http://infosecurity.ch/20100201/evidence-that-infosecurityguard-comnotrax-is-securstar-gmbh-a-fake-independent-research-on-voice-crypto/": 200,
+      "http://infosecurity.ch/20110124/my-tor-exit-node-experience-trying-to-filter-out-noisy-traffic/": 200,
+      "http://infosecurity.ch/publickey.asc": 200
+    }
+  },
+  {
+    "linking_url": "https://github.com/fpietrosanti/infosecurity-ch",
+    "site": "github.com",
+    "date": null,
+    "targets": [
+      "https://infosecurity.ch"
+    ],
+    "anchor": "repository homepage link of the restoration project itself",
+    "link_type": "href",
+    "topic": "restoration repo",
+    "self_owned": true,
+    "status": {
+      "https://infosecurity.ch": 200
+    },
+    "status_after_redirect": {
+      "https://infosecurity.ch": 200
+    }
+  }
+]
