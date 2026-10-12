@@ -98,6 +98,12 @@ LEGACY_REDIRECTS = {
     "/comments/feed/": "/feed.xml",
 }
 
+# The /<lang>/ pages are Google-Translate output from 2013-2014. They are always served
+# (the URLs must keep working); this decides whether they are offered to search engines.
+# False => noindex + no sitemap entry + no hreflang, so crawling concentrates on the
+# English originals. Search Console on 2026-10-12: 211 of them crawled and not indexed.
+INDEX_TRANSLATIONS = True
+
 HREFLANG_FIX = {"iw": "he"}
 LANG_RE = re.compile(r"^[a-z]{2}(-[A-Z]{2})?$")
 POST_RE = re.compile(r"^/(\d{4})(\d{2})(\d{2})/([^/]+)/$")
@@ -739,7 +745,9 @@ def build_lang_home(lang: str, pages, alternates):
         "title": f"{blog_name} | {SITE_NAME} ({lang})",
         "og_title": blog_name,
         "description": clip(f"{blog_name} — {', '.join(t for _u, t, _k, _i in posts[:4])}"),
-        "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+        "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+        if INDEX_TRANSLATIONS
+        else "noindex,follow",
         "indexable": True,
         "alternates": alternates,
         "og_locale": OG_LOCALES.get(lang, "en_US"),
@@ -932,6 +940,7 @@ def main():
 
         s = cleanup(s, outgoing_map)
         indexable = kind in ("home", "post", "page", "list")
+        offered = indexable and (INDEX_TRANSLATIONS or lang == "en")
         en_post = posts.get(key)
         tail = re.search(r"<title>(.*?)</title>", s, re.S)
         tail = text_of(tail.group(1)) if tail else ""
@@ -985,10 +994,10 @@ def main():
             "og_title": ptitle,
             "description": desc or f"{ptitle} – infosecurity.ch",
             "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
-            if indexable
+            if offered
             else "noindex,follow",
             "indexable": indexable,
-            "alternates": alternates_for(key) if indexable else [],
+            "alternates": alternates_for(key) if offered and INDEX_TRANSLATIONS else [],
             "og_locale": OG_LOCALES.get(lang, "en_US"),
         }
         lang = LANG_OVERRIDE.get(url, lang)
@@ -1089,7 +1098,7 @@ def main():
             s = insert_recent_post(s, lang)
             s = insert_footer_note(s)
         write(dst, s)
-        if indexable:
+        if offered:
             if not sitemap_lastmod and kind in ("list", "page"):
                 newest = re.search(r'<abbr class="published" title="(\d{4}-\d{2}-\d{2})', s)
                 sitemap_lastmod = newest.group(1) if newest else None
@@ -1098,8 +1107,8 @@ def main():
                 lang_pages.setdefault(lang, []).append((url, ptitle, kind, (en_post or {}).get("iso", "")))
 
     for lang in missing_homes:
-        entry = build_lang_home(lang, lang_pages.get(lang, []), alternates_for("/"))
-        if entry:
+        entry = build_lang_home(lang, lang_pages.get(lang, []), alternates_for("/") if INDEX_TRANSLATIONS else [])
+        if entry and INDEX_TRANSLATIONS:
             sitemap.append(entry)
 
     # ---- new restoration post (from the newest EN post as template) ----
