@@ -103,7 +103,23 @@ www.infosecurity.ch.  CNAME fpietrosanti.github.io.
 - Remove the wildcard `*` A record: GitHub advises against wildcard DNS.
 - GitHub domain verification is a TXT record `_github-pages-challenge-fpietrosanti` with the value
   shown in GitHub → Settings → Pages → Add a domain. It overrides the wildcard TXT.
-- `site/CNAME` contains `infosecurity.ch`. After DNS propagates, enable **Enforce HTTPS** in the repo's Pages settings.
+- `site/CNAME` contains `infosecurity.ch`. Enforce HTTPS: enabled 2026-10-06.
+
+## Search-engine state (checked 2026-10-12, in Fabio's logged-in browser)
+
+- **Google Search Console**: the domain property `sc-domain:infosecurity.ch` was already verified on the
+  account `fabio@infosecurity.ch` (the `google-site-verification` TXT in DNS belongs to it). The sitemap
+  index is submitted, last read 2026-10-08, status Success, 814 URLs discovered. URL Inspection says
+  "URL is on Google / Page is indexed" for the home page, the restoration post, the recovered 2010 post
+  and the SecurStar evidence post. Breadcrumbs structured data: 24 valid, 0 invalid. The Links report is
+  still empty, which is normal weeks after a domain comes back.
+- **GitHub verified domain**: `infosecurity.ch` is added and waiting for its DNS challenge. Record to
+  create at EuroDNS: TXT `_github-pages-challenge-fpietrosanti.infosecurity.ch` =
+  `77dbbca9fbda84d925abf053c341b4` (an explicit record overrides the wildcard TXT), then press Verify in
+  GitHub → Settings → Pages. Not done here: the EuroDNS panel needs a login, and its only passwordless
+  option ("Log in with Google") asks to grant EuroDNS read access to phone numbers and addresses.
+- **Bing Webmaster Tools**: no account exists; signing in would mean creating one. Not needed for
+  submission — IndexNow already feeds Bing, Yandex, Seznam and Naver — only for their reports.
 
 After cut-over: run the "IndexNow ping" workflow. Add the site to Google Search Console (the
 domain is already verified via TXT) and to Bing Webmaster Tools (import from GSC), then submit
