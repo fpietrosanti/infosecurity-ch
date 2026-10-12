@@ -690,6 +690,89 @@ def rss(items, self_url):
     return "\n".join(out)
 
 
+def build_lang_home(lang: str, pages, alternates):
+    """Index page for a language whose translated home page was never captured.
+
+    The 2017 site served /<lang>/ through the translation plugin; the download only has
+    the inner pages, so /<lang>/ was a 404. This rebuilds an entry point from the
+    translated pages themselves: same chrome, same language, no invented text.
+    """
+    if not pages:
+        return None
+    posts = [p for p in pages if p[2] == "post"]
+    posts.sort(key=lambda p: p[3], reverse=True)
+    lists = [p for p in pages if p[2] == "list"]
+    # some captures under /<lang>/ are the untranslated original: prefer a page whose
+    # chrome really is in that language, so the generated index is not an English page
+    template_url, tpl, blog_name = None, None, BLOG_NAME
+    for cand, _t, _k, _i in posts + lists:
+        text = read(SITE / cand.strip("/") / "index.html")
+        m = re.search(r'id="blog-title"[^>]*>(.*?)</(?:h1|div)>', text, re.S)
+        name = text_of(m.group(1)) if m else ""
+        if template_url is None:
+            template_url, tpl, blog_name = cand, text, name or BLOG_NAME
+        if name and name != BLOG_NAME and "translate.google" not in (m.group(1) if m else ""):
+            template_url, tpl, blog_name = cand, text, name
+            break
+
+    items = "\n".join(
+        f'\t\t\t<li><a href="{esc(u)}">{esc(t)}</a></li>' for u, t, _k, _iso in posts
+    )
+    extra = "\n".join(f'\t\t\t<li><a href="{esc(u)}">{esc(t)}</a></li>' for u, t, _k, _iso in sorted(lists))
+    content = (
+        '<div id="content">\n'
+        f'\t\t\t<h1 class="page-title">{esc(blog_name)}</h1>\n'
+        f'\t\t\t<p><a href="/" hreflang="en">{esc(BLOG_NAME)}</a> (original, English)</p>\n'
+        f"\t\t\t<ul>\n{items}\n\t\t\t</ul>\n"
+        + (f"\t\t\t<ul>\n{extra}\n\t\t\t</ul>\n" if extra else "")
+        + "\t\t</div><!-- #content -->"
+    )
+    start = tpl.find('<div id="content">')
+    end = tpl.find("</div><!-- #content -->")
+    page = tpl[:start] + content + tpl[end + len("</div><!-- #content -->") :]
+
+    url = f"/{lang}/"
+    meta = {
+        "url": url,
+        "lang": lang,
+        "kind": "list",
+        "title": f"{blog_name} | {SITE_NAME} ({lang})",
+        "og_title": blog_name,
+        "description": clip(f"{blog_name} — {', '.join(t for _u, t, _k, _i in posts[:4])}"),
+        "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+        "indexable": True,
+        "alternates": alternates,
+        "og_locale": OG_LOCALES.get(lang, "en_US"),
+        "jsonld": {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "CollectionPage",
+                    "url": BASE + url,
+                    "name": blog_name,
+                    "inLanguage": HREFLANG_FIX.get(lang, lang),
+                    "isPartOf": {"@id": f"{BASE}/#blog"},
+                    "author": {"@id": f"{BASE}/#author"},
+                },
+                breadcrumb([("Home", "/"), (blog_name, url)]),
+            ],
+        },
+    }
+    page = re.sub(r"<title>.*?</title>.*?(?=<style>\n\.blogtitle)", "", page, count=1, flags=re.S)
+    head = seo_head(meta).split("<style>\n.blogtitle")[0]
+    page = page.replace("<style>\n.blogtitle", head + "<style>\n.blogtitle", 1)
+    # the template sits three levels deep; resolve its relative links against it
+    def root_relative(m):
+        v = html.unescape(m.group(2))
+        if v.startswith(("http:", "https:", "//", "#", "mailto:", "javascript:", "data:", "/")):
+            return m.group(0)
+        return f'{m.group(1)}="{esc(urllib.parse.urlsplit(urllib.parse.urljoin(BASE + template_url, v)).path)}"'
+
+    page = re.sub(r'\b(href|src)="([^"]*)"', root_relative, page)
+    write(SITE / lang / "index.html", page)
+    return (url, RESTORE_DATE, alternates, "list", None)
+
+
 SITEMAP_CHUNK = 5000
 
 
@@ -821,6 +904,12 @@ def main():
             available.setdefault(key, set()).add(lang)
     for lang in NEW_POST["titles"]:
         available.setdefault(NEW_POST["path"], set()).add(lang)
+    # 11 languages were crawled in 2017 but their translated home page was never captured,
+    # so /<lang>/ returned 404. Build an index page for them (see build_lang_home).
+    missing_homes = [lg for lg in LANGS if lg not in available.get("/", set())]
+    for lg in missing_homes:
+        available.setdefault("/", set()).add(lg)
+    lang_pages = {}
 
     def alternates_for(key):
         langs = available.get(key, set())
@@ -1005,6 +1094,13 @@ def main():
                 newest = re.search(r'<abbr class="published" title="(\d{4}-\d{2}-\d{2})', s)
                 sitemap_lastmod = newest.group(1) if newest else None
             sitemap.append((url, sitemap_lastmod, meta["alternates"], kind, meta.get("image")))
+            if lang in missing_homes and kind in ("post", "list"):
+                lang_pages.setdefault(lang, []).append((url, ptitle, kind, (en_post or {}).get("iso", "")))
+
+    for lang in missing_homes:
+        entry = build_lang_home(lang, lang_pages.get(lang, []), alternates_for("/"))
+        if entry:
+            sitemap.append(entry)
 
     # ---- new restoration post (from the newest EN post as template) ----
     newest_url = max(posts, key=lambda u: posts[u]["iso"])
