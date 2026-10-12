@@ -69,6 +69,16 @@ Restored on 2026-09-17 from a Wayback download (1,653 files): WordPress 4.8, the
     `ProfilePage` for the author page, `BreadcrumbList`.
 - Post pages: the post title is the `h1`; the site title becomes a styled `div` with the same look.
 - Non-content pages (redirect stubs, 2008 WordPress placeholder pages, crawler junk) are `noindex`.
+- **Translations are served but not offered to search engines** (`INDEX_TRANSLATIONS = False`,
+  decided 2026-10-12): every `/<lang>/` URL still answers 200 exactly as before, but carries
+  `noindex,follow`, is absent from the sitemap and has no hreflang. Reason: Search Console had 211 of
+  them "crawled - currently not indexed" — Google does not index 2013-era machine translation — while
+  they absorbed most of the crawl budget. Flip the flag back to `True` to offer them again.
+  The hand-written IT/DE/FR restoration post stays indexable.
+- **The 11 language home pages** (`/ar/ /ca/ /fi/ /hr/ /mt/ /nl/ /pl/ /pt/ /ru/ /sq/ /th/`) are rebuilt by
+  `build_lang_home()`: the 2017 site generated them through the translation plugin and the download
+  never captured them, so those URLs were the "Not found (404)" group in Search Console. Each is an
+  index of that language's own pages, using the translated chrome and titles — no invented text.
 - `sitemap.xml` is a **sitemap index** pointing to `sitemap-posts.xml` (76), `sitemap-pages.xml` (50)
   and `sitemap-translations-N.xml` (688, chunks of 5,000). Each URL carries `lastmod` (post date, or the
   newest post listed on an archive page), `xhtml:link` hreflang alternates and `image:image`.
@@ -109,7 +119,8 @@ www.infosecurity.ch.  CNAME fpietrosanti.github.io.
 
 - **Google Search Console**: the domain property `sc-domain:infosecurity.ch` was already verified on the
   account `fabio@infosecurity.ch` (the `google-site-verification` TXT in DNS belongs to it). The sitemap
-  index is submitted, last read 2026-10-08, status Success, 814 URLs discovered. URL Inspection says
+  index is submitted, last read 2026-10-08, status Success (814 URLs then, 129 after the
+  translations were taken out). URL Inspection says
   "URL is on Google / Page is indexed" for the home page, the restoration post, the recovered 2010 post
   and the SecurStar evidence post. Breadcrumbs structured data: 24 valid, 0 invalid. The Links report is
   still empty, which is normal weeks after a domain comes back.
