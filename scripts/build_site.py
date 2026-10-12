@@ -102,7 +102,7 @@ LEGACY_REDIRECTS = {
 # (the URLs must keep working); this decides whether they are offered to search engines.
 # False => noindex + no sitemap entry + no hreflang, so crawling concentrates on the
 # English originals. Search Console on 2026-10-12: 211 of them crawled and not indexed.
-INDEX_TRANSLATIONS = True
+INDEX_TRANSLATIONS = False
 
 HREFLANG_FIX = {"iw": "he"}
 LANG_RE = re.compile(r"^[a-z]{2}(-[A-Z]{2})?$")
@@ -352,6 +352,9 @@ REMOVE_PATTERNS = [
     r'<link rel=["\']dns-prefetch["\'] href=["\'](?:https?:)?//s\.w\.org/?["\'][^>]*>\n?',
     r'<link rel=["\']alternate["\'] type=["\'](?:application/rss\+xml|application/atom\+xml|application/json\+oembed|text/xml\+oembed)["\'][^>]*>\n?',
     r'<meta name=["\']generator["\'][^>]*>\n?',
+    # the 2017 translation plugin emitted its own hreflang set; we emit ours, or none
+    r'<link[^>]*\brel=["\']alternate["\'][^>]*\bhreflang=[^>]*>\n?',
+    r'<link[^>]*\bhreflang=[^>]*\brel=["\']alternate["\'][^>]*>\n?',
     r'<meta name=["\']robots["\'][^>]*>\n?',
     r'<meta name=["\']description["\'][^>]*>\n?',
     r'[ \t]*<script type="text/javascript">\s*window\._wpemojiSettings.*?</script>\n?',
@@ -817,7 +820,7 @@ def write_sitemaps(sitemap):
         else:
             pages.append(entry)
     files = [("sitemap-posts.xml", posts), ("sitemap-pages.xml", pages)]
-    chunks = [translations[i : i + SITEMAP_CHUNK] for i in range(0, len(translations), SITEMAP_CHUNK)] or [[]]
+    chunks = [translations[i : i + SITEMAP_CHUNK] for i in range(0, len(translations), SITEMAP_CHUNK)]
     for i, chunk in enumerate(chunks, 1):
         files.append((f"sitemap-translations-{i}.xml", chunk))
     index = [
@@ -1103,8 +1106,9 @@ def main():
                 newest = re.search(r'<abbr class="published" title="(\d{4}-\d{2}-\d{2})', s)
                 sitemap_lastmod = newest.group(1) if newest else None
             sitemap.append((url, sitemap_lastmod, meta["alternates"], kind, meta.get("image")))
-            if lang in missing_homes and kind in ("post", "list"):
-                lang_pages.setdefault(lang, []).append((url, ptitle, kind, (en_post or {}).get("iso", "")))
+        # the rebuilt language home pages are served whether or not translations are offered
+        if indexable and lang in missing_homes and kind in ("post", "list"):
+            lang_pages.setdefault(lang, []).append((url, ptitle, kind, (en_post or {}).get("iso", "")))
 
     for lang in missing_homes:
         entry = build_lang_home(lang, lang_pages.get(lang, []), alternates_for("/") if INDEX_TRANSLATIONS else [])
