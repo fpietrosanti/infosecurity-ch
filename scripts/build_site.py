@@ -1568,6 +1568,23 @@ def prune_orphans(files, junk_pages):
         if not any(d.iterdir()):
             d.rmdir()
     print(f"pruned {removed} orphan third-party/downloader files")
+    warn_ignored_output()
+
+
+def warn_ignored_output():
+    """A .gitignore rule that also matches something under site/ silently drops it from the
+    deploy (it happened with `archive/`, which hid /archive/ and three redirect stubs)."""
+    import subprocess
+
+    paths = "\n".join(str(p.relative_to(ROOT)) for p in SITE.rglob("*") if p.is_file())
+    try:
+        out = subprocess.run(
+            ["git", "check-ignore", "--stdin"], cwd=ROOT, input=paths, capture_output=True, text=True
+        ).stdout.split()
+    except OSError:
+        return
+    if out:
+        print(f"WARNING: {len(out)} built files are git-ignored and will not deploy, e.g. {out[:3]}")
 
 
 def page_404():
