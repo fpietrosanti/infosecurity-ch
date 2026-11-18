@@ -29,3 +29,5 @@ Ein Beitrag von 2010, der vor 2017 aus dem Blog verschwunden war, ist zurück, w
 Am schnellsten erreichen Sie mich per Nachricht auf [LinkedIn](https://www.linkedin.com/in/secret/); weitere Angaben finden Sie auf meiner [Homepage](https://fabio.pietrosanti.it/).
 
 — Fabio (naif) Pietrosanti
+
+[English](/20260917/infosecurity-ch-restored/) · [Italiano](/it/20260917/infosecurity-ch-restored/) · [Français](/fr/20260917/infosecurity-ch-restored/)

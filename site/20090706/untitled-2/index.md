@@ -13,7 +13,9 @@ Below my slides on voice security and privacy from [Security Summit 2009](http:/
 
 mmm, yes i am working in this area from 2005, will write again about it.
 
-[2009: Voice Security And Privacy (Security Summit - Milan)](http://www.slideshare.net/fpietrosanti/2009-voice-security-and-privacy-security-summit-milan "2009: Voice Security And Privacy (Security Summit - Milan)")  
+[2009: Voice Security And Privacy (Security Summit - Milan)](http://www.slideshare.net/fpietrosanti/2009-voice-security-and-privacy-security-summit-milan "2009: Voice Security And Privacy (Security Summit - Milan)")
+
+Slides: [2009 voice security and privacy security summit milan](https://www.slideshare.net/fpietrosanti/2009-voice-security-and-privacy-security-summit-milan) — the SlideShare Flash player embedded here no longer works.
 
 View more [presentations](http://www.slideshare.net/) from [Fabio Pietrosanti](http://www.slideshare.net/fpietrosanti).
 

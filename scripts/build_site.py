@@ -375,6 +375,28 @@ COMMENTS_CLOSED = (
 
 COMMENTS_CLOSED_P = f'<p class="comments-closed">Comments are closed (archive restored on {RESTORE_HUMAN}).</p>'
 
+# SlideShare decks that were embedded as Flash. Only the author's own decks get a link;
+# the two third-party ones are named but not linked, since their SlideShare account is unknown.
+SLIDESHARE_DECKS = {
+    "voice-communication-security": "https://www.slideshare.net/fpietrosanti/voice-communication-security",
+    "2009-voice-security-and-privacy-security-summit-milan": (
+        "https://www.slideshare.net/fpietrosanti/2009-voice-security-and-privacy-security-summit-milan"
+    ),
+}
+
+
+ARCHIVE_INDEX = "/archive/"
+
+
+def slideshare_link(slug: str) -> str:
+    name = slug.replace("-", " ")
+    url = SLIDESHARE_DECKS.get(slug)
+    inner = f'<a href="{url}" rel="noopener">{esc(name)}</a>' if url else f"<em>{esc(name)}</em>"
+    return (
+        '<p class="slideshare-embed" style="padding:0.6em 0.8em;background:#f4f4f4;border-left:4px solid #888">'
+        f"Slides: {inner} &mdash; the SlideShare Flash player embedded here no longer works.</p>"
+    )
+
 EXTRA_CSS = """<style>
 .blogtitle{display:block;font-family:'PT+Sans&subset=latin',Helvetica,Verdana,Arial,Sans-Serif;font-size:4em;font-weight:bold;margin:0 0 0 8px}
 div.blogtitle a,div.blogtitle a:link,div.blogtitle a:visited,div.blogtitle a:hover{color:#444;background:transparent}
@@ -432,6 +454,17 @@ def cleanup(s: str, outgoing_map: dict) -> str:
         s,
         flags=re.S,
     )
+    # Flash SlideShare embeds -> a link. The downloader shipped Ruffle (a 12.5 MB WASM Flash
+    # emulator, loaded on every page) to play them, but the players only ever streamed the
+    # deck from slidesharecdn, which is long gone, so Ruffle had nothing to show.
+    s = re.sub(
+        r"<object\b(?:(?!</object>).)*?stripped_title=([a-z0-9-]+)(?:(?!</object>).)*?</object>",
+        lambda m: slideshare_link(m.group(1)),
+        s,
+        flags=re.S,
+    )
+    s = re.sub(r"<script>window\.RufflePlayer.*?</script>\s*", "", s, flags=re.S)
+    s = re.sub(r'<script[^>]*src="[^"]*ruffle/ruffle\.js"[^>]*>\s*</script>\s*', "", s)
     # Comment form -> closed notice
     s = re.sub(r'<div id="respond"[^>]*>.*?</div><!-- #respond -->', COMMENTS_CLOSED, s, flags=re.S)
     s = re.sub(r'<form action="[^"]*" method="post" id="commentform".*?</form>', COMMENTS_CLOSED_P, s, flags=re.S)
@@ -484,7 +517,8 @@ def insert_recent_post(s: str, lang: str) -> str:
 
 def insert_footer_note(s: str) -> str:
     note = (
-        f'<p>Archive restored on {RESTORE_HUMAN} &middot; <a href="{NEW_POST["path"]}">about the restoration</a> '
+        f'<p>Archive restored on {RESTORE_HUMAN} &middot; <a href="{ARCHIVE_INDEX}">all posts</a> '
+        f'&middot; <a href="{NEW_POST["path"]}">about the restoration</a> '
         '&middot; <a href="https://fabio.pietrosanti.it/" rel="author">Fabio Pietrosanti</a></p>'
     )
     return s.replace('<div id="footerlink"><div class="alignright">', '<div id="footerlink"><div class="alignright">' + note, 1)
@@ -784,6 +818,92 @@ def build_lang_home(lang: str, pages, alternates):
     return (url, RESTORE_DATE, alternates, "list", None)
 
 
+def build_archive_index(posts, en_lists):
+    """One page linking every post, month, tag and category.
+
+    The 2017 blog had no such page: posts were reachable only through pagination, and the
+    February 2007 archive through nothing at all. It is a plain index of what exists, and it
+    gives every post a second internal link (Search Console had 527 English URLs discovered
+    but never crawled).
+    """
+    by_year = {}
+    for p in sorted(posts.values(), key=lambda x: x["iso"], reverse=True):
+        by_year.setdefault(p["iso"][:4], []).append(p)
+    blocks = []
+    for year, items in sorted(by_year.items(), reverse=True):
+        rows = "\n".join(
+            f'\t\t\t\t<li><span class="entry-date">{p["iso"][8:10]} {MONTHS[int(p["iso"][5:7]) - 1][:3]}</span> '
+            f'<a href="{p["url"]}">{esc(p["title"])}</a></li>'
+            for p in items
+        )
+        blocks.append(f'\t\t\t<h2>{year}</h2>\n\t\t\t<ul class="archive-year">\n{rows}\n\t\t\t</ul>')
+
+    def group(prefix, heading):
+        rows = [
+            f'<a href="{u}">{esc(t.split(":")[-1].split("“")[-1].rstrip("”").strip())}</a>'
+            for u, t in sorted(set(en_lists))
+            if u.startswith(prefix)
+        ]
+        return f'\t\t\t<h2>{heading}</h2>\n\t\t\t<p>{" &middot; ".join(rows)}</p>' if rows else ""
+
+    extra = "\n".join(x for x in (group("/tag/", "Tags"), group("/category/", "Categories"), group("/20", "Months")) if x)
+    content = (
+        '<div id="content">\n'
+        '\t\t\t<h1 class="page-title">All posts</h1>\n'
+        f"\t\t\t<p>Every post published on infosecurity.ch between 2007 and 2017, plus the "
+        f'<a href="{NEW_POST["path"]}">2026 restoration note</a>. {len(posts)} posts.</p>\n'
+        + "\n".join(blocks)
+        + ("\n" + extra if extra else "")
+        + "\n\t\t</div><!-- #content -->"
+    )
+    tpl = read(SITE / "index.html")
+    start, end = tpl.find('<div id="content">'), tpl.find("</div><!-- #content -->")
+    page = tpl[:start] + content + tpl[end + len("</div><!-- #content -->") :]
+    page = re.sub(r'<body class="[^"]*"', '<body class="wordpress archive-index"', page, count=1)
+    page = re.sub(r"<script>\(function\(\)\{var q=new URLSearchParams.*?</script>\n?", "", page, flags=re.S)
+    meta = {
+        "url": ARCHIVE_INDEX,
+        "lang": "en",
+        "kind": "list",
+        "title": f"All posts | {SITE_NAME}",
+        "og_title": "All posts",
+        "description": (
+            f"Complete index of the {len(posts)} posts published on infosecurity.ch between 2007 and 2017 by "
+            "Fabio Pietrosanti (naif): privacy, security, hacking, encryption, interception and intelligence."
+        ),
+        "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+        "indexable": True,
+        "alternates": [],
+        "og_locale": "en_US",
+        "jsonld": {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "CollectionPage",
+                    "url": BASE + ARCHIVE_INDEX,
+                    "name": "All posts",
+                    "inLanguage": "en",
+                    "isPartOf": {"@id": f"{BASE}/#blog"},
+                    "author": {"@id": f"{BASE}/#author"},
+                },
+                breadcrumb([("Home", "/"), ("All posts", ARCHIVE_INDEX)]),
+            ],
+        },
+    }
+    page = re.sub(r"<title>.*?</title>.*?(?=<style>\n\.blogtitle)", "", page, count=1, flags=re.S)
+    page = page.replace("<style>\n.blogtitle", seo_head(meta).split("<style>\n.blogtitle")[0] + "<style>\n.blogtitle", 1)
+
+    def absolutise(m):
+        v = html.unescape(m.group(2))
+        if v.startswith(("http:", "https:", "//", "#", "mailto:", "javascript:", "data:", "/")):
+            return m.group(0)
+        return f'{m.group(1)}="/{esc(v)}"'
+
+    page = re.sub(r'\b(href|src)="([^"]*)"', absolutise, page)
+    write(SITE / ARCHIVE_INDEX.strip("/") / "index.html", page)
+    return (ARCHIVE_INDEX, RESTORE_DATE, [], "list", None)
+
+
 SITEMAP_CHUNK = 5000
 
 
@@ -921,6 +1041,7 @@ def main():
     for lg in missing_homes:
         available.setdefault("/", set()).add(lg)
     lang_pages = {}
+    en_lists = []
 
     def alternates_for(key):
         langs = available.get(key, set())
@@ -1109,11 +1230,15 @@ def main():
         # the rebuilt language home pages are served whether or not translations are offered
         if indexable and lang in missing_homes and kind in ("post", "list"):
             lang_pages.setdefault(lang, []).append((url, ptitle, kind, (en_post or {}).get("iso", "")))
+        if lang == "en" and kind == "list" and "/page/" not in url:
+            en_lists.append((url, ptitle))
 
     for lang in missing_homes:
         entry = build_lang_home(lang, lang_pages.get(lang, []), alternates_for("/") if INDEX_TRANSLATIONS else [])
         if entry and INDEX_TRANSLATIONS:
             sitemap.append(entry)
+
+    sitemap.append(build_archive_index(posts, en_lists))
 
     # ---- new restoration post (from the newest EN post as template) ----
     newest_url = max(posts, key=lambda u: posts[u]["iso"])
@@ -1406,7 +1531,7 @@ def build_inventory():
 
 
 DOWNLOADER_ARTIFACTS = {".htaccess", "nginx.txt", "files_count.xml"}
-KEEP_PREFIXES = ("wp-content/", "wp-includes/", "ruffle/", "translate/", "avatar/", "menu/", "images/", "swf/", "favicon.ico")
+KEEP_PREFIXES = ("wp-content/", "wp-includes/", "translate/", "avatar/", "menu/", "images/", "swf/", "favicon.ico")
 
 
 def prune_orphans(files, junk_pages):

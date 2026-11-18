@@ -27,6 +27,8 @@ It’s a huge slideware, 122 slides, i suggest to go reading the 2nd part skippi
 
 **[Voice communication security](http://www.slideshare.net/fpietrosanti/voice-communication-security "Voice communication security")**
 
+Slides: [voice communication security](https://www.slideshare.net/fpietrosanti/voice-communication-security) — the SlideShare Flash player embedded here no longer works.
+
 View more [presentations](http://www.slideshare.net/) from [Fabio Pietrosanti](http://www.slideshare.net/fpietrosanti).
 
 Especially i like the concept of **Chocolate grade encryption** that want to provide some innovation on the **Snake Oil Encryption** concept.

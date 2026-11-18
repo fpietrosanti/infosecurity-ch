@@ -115,6 +115,18 @@ www.infosecurity.ch.  CNAME fpietrosanti.github.io.
   shown in GitHub → Settings → Pages → Add a domain. It overrides the wildcard TXT.
 - `site/CNAME` contains `infosecurity.ch`. Enforce HTTPS: enabled 2026-10-06.
 
+## Performance and internal linking (2026-11-18)
+
+- **Ruffle removed.** The downloader had injected a Flash emulator (`ruffle.js`, 363 KB) into every
+  page, plus a 12.5 MB `.wasm` it fetches whenever a Flash object is present. The only Flash objects
+  left were SlideShare players that streamed from `slidesharecdn`, which is gone, so Ruffle had
+  nothing to play. Each embed is now a link to the deck (the author's two) or a named note (the two
+  third-party ones), and `site/ruffle/` is no longer shipped: 13 MB less, no WASM on page load.
+- **`/archive/`**: one page listing all 76 posts by year plus every tag, category and month, linked
+  from the footer of every page. Before it there were no internal links at all to `/2007/02/`, and
+  most posts had a single one; now the site has zero orphan pages.
+- The restoration post links its IT/DE/FR versions (they were reachable only through hreflang).
+
 ## Search-engine state (checked 2026-10-12, in Fabio's logged-in browser)
 
 - **Google Search Console**: the domain property `sc-domain:infosecurity.ch` was already verified on the

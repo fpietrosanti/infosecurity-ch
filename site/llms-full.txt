@@ -34,6 +34,8 @@ The quickest way to reach me is a message on [LinkedIn](https://www.linkedin.com
 
 — Fabio (naif) Pietrosanti
 
+[Italiano](https://infosecurity.ch/it/20260917/infosecurity-ch-restored/) · [Deutsch](https://infosecurity.ch/de/20260917/infosecurity-ch-restored/) · [Français](https://infosecurity.ch/fr/20260917/infosecurity-ch-restored/)
+
 
 ---
 
@@ -867,6 +869,8 @@ I tried to explain and get out from this widely fragmented technological sector 
 It’s a huge slideware, 122 slides, i suggest to go reading the 2nd part skipping interception technologies overview already covered by my presentation of 2009.
 
 **[Voice communication security](http://www.slideshare.net/fpietrosanti/voice-communication-security "Voice communication security")**
+
+Slides: [voice communication security](https://www.slideshare.net/fpietrosanti/voice-communication-security) — the SlideShare Flash player embedded here no longer works.
 
 View more [presentations](http://www.slideshare.net/) from [Fabio Pietrosanti](http://www.slideshare.net/fpietrosanti).
 
@@ -3111,7 +3115,9 @@ I found two amazing and very well done presentations about it, i suggest to read
 
 Very in depth presentation. Ask yourself, do you know what’s the differences between marketing and promotions, sales, advertising? How to really manage the core of the company, the product?
 
-[Strategic Role - Product Management](http://www.slideshare.net/afzee/strategic-role-product-management "Strategic Role - Product Management")  
+[Strategic Role - Product Management](http://www.slideshare.net/afzee/strategic-role-product-management "Strategic Role - Product Management")
+
+Slides: *strategic role product management* — the SlideShare Flash player embedded here no longer works.
 
 View more [presentations](http://www.slideshare.net/) from [Afzal Khan](http://www.slideshare.net/afzee).
 
@@ -3119,7 +3125,9 @@ View more [presentations](http://www.slideshare.net/) from [Afzal Khan](http://w
 
 Very smooth presentation going to the point: A product is the tiny overlap between the needs of a business, the aspirations of it’s development team and the unsatisfied desires of the customer.
 
-[Product Management For Brainmates](http://www.slideshare.net/bigyahu/product-management-for-brainmates "Product Management For Brainmates")  
+[Product Management For Brainmates](http://www.slideshare.net/bigyahu/product-management-for-brainmates "Product Management For Brainmates")
+
+Slides: *product management for brainmates* — the SlideShare Flash player embedded here no longer works.
 
 View more [presentations](http://www.slideshare.net/) from [Alan Jones](http://www.slideshare.net/bigyahu).
 
@@ -3195,7 +3203,9 @@ Below my slides on voice security and privacy from [Security Summit 2009](http:/
 
 mmm, yes i am working in this area from 2005, will write again about it.
 
-[2009: Voice Security And Privacy (Security Summit - Milan)](http://www.slideshare.net/fpietrosanti/2009-voice-security-and-privacy-security-summit-milan "2009: Voice Security And Privacy (Security Summit - Milan)")  
+[2009: Voice Security And Privacy (Security Summit - Milan)](http://www.slideshare.net/fpietrosanti/2009-voice-security-and-privacy-security-summit-milan "2009: Voice Security And Privacy (Security Summit - Milan)")
+
+Slides: [2009 voice security and privacy security summit milan](https://www.slideshare.net/fpietrosanti/2009-voice-security-and-privacy-security-summit-milan) — the SlideShare Flash player embedded here no longer works.
 
 View more [presentations](http://www.slideshare.net/) from [Fabio Pietrosanti](http://www.slideshare.net/fpietrosanti).
 

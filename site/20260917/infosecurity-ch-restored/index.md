@@ -29,3 +29,5 @@ One 2010 post that had vanished from the blog before 2017 is back, recovered fro
 The quickest way to reach me is a message on [LinkedIn](https://www.linkedin.com/in/secret/); more details are on my [home page](https://fabio.pietrosanti.it/).
 
 — Fabio (naif) Pietrosanti
+
+[Italiano](/it/20260917/infosecurity-ch-restored/) · [Deutsch](/de/20260917/infosecurity-ch-restored/) · [Français](/fr/20260917/infosecurity-ch-restored/)

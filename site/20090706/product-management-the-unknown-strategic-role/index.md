@@ -17,7 +17,9 @@ I found two amazing and very well done presentations about it, i suggest to read
 
 Very in depth presentation. Ask yourself, do you know what’s the differences between marketing and promotions, sales, advertising? How to really manage the core of the company, the product?
 
-[Strategic Role - Product Management](http://www.slideshare.net/afzee/strategic-role-product-management "Strategic Role - Product Management")  
+[Strategic Role - Product Management](http://www.slideshare.net/afzee/strategic-role-product-management "Strategic Role - Product Management")
+
+Slides: *strategic role product management* — the SlideShare Flash player embedded here no longer works.
 
 View more [presentations](http://www.slideshare.net/) from [Afzal Khan](http://www.slideshare.net/afzee).
 
@@ -25,6 +27,8 @@ View more [presentations](http://www.slideshare.net/) from [Afzal Khan](http://w
 
 Very smooth presentation going to the point: A product is the tiny overlap between the needs of a business, the aspirations of it’s development team and the unsatisfied desires of the customer.
 
-[Product Management For Brainmates](http://www.slideshare.net/bigyahu/product-management-for-brainmates "Product Management For Brainmates")  
+[Product Management For Brainmates](http://www.slideshare.net/bigyahu/product-management-for-brainmates "Product Management For Brainmates")
+
+Slides: *product management for brainmates* — the SlideShare Flash player embedded here no longer works.
 
 View more [presentations](http://www.slideshare.net/) from [Alan Jones](http://www.slideshare.net/bigyahu).

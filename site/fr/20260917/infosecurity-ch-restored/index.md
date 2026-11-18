@@ -29,3 +29,5 @@ Un article de 2010 qui avait disparu du blog avant 2017 est de retour, récupér
 Le moyen le plus rapide de me joindre est un message sur [LinkedIn](https://www.linkedin.com/in/secret/) ; d'autres coordonnées figurent sur ma [page d'accueil](https://fabio.pietrosanti.it/).
 
 — Fabio (naif) Pietrosanti
+
+[English](/20260917/infosecurity-ch-restored/) · [Italiano](/it/20260917/infosecurity-ch-restored/) · [Deutsch](/de/20260917/infosecurity-ch-restored/)
