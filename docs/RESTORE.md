@@ -40,6 +40,19 @@ Restored on 2026-09-17 from a Wayback download (1,653 files): WordPress 4.8, the
   republish third-party files.
 - **Spam link removed.** The old WordPress had been tampered with: in the 2011 Tor exit-node post, the
   `tor.infosecurity.ch` link pointed to a spam site (`prostosale.com`). The original target is restored.
+  The cause is now documented (2026-11-24): it was not the blog that was tampered with but the
+  **sibling subdomains**. Every Wayback capture of `tor.infosecurity.ch` and
+  `privacyresearch.infosecurity.ch` from 2013 to 2017 is an HTTP 302 to `prostosale.com`, and the
+  2017 `robots.txt` of `privacyresearch` is an online-shop template. Both hostnames had been taken
+  over after the research VPS was decommissioned; the downloader simply followed the redirect.
+- **Dead self-owned links repointed** (2026-11-24). The same post linked the exit node's own pages
+  by bare IP, `88.198.109.35` - a Hetzner address that can be reassigned to anyone, so the links
+  would eventually have pointed at a stranger's server. They now go to the last good capture
+  (2011-03-03) of the exit notice and of `exitpolicy.txt`, with `rel="nofollow noopener"`.
+  `http://tor.infosecurity.ch` is left as plain text, because its only HTTP 200 capture has an
+  empty body; the `/outgoing/` click-tracking stubs for all three now redirect to the archive
+  instead of to the dead hosts. This matters beyond one post: that body is reprinted on 339 pages
+  (home, tag, category, author and month listings), so it was the site's most repeated dead link.
 - **Encoding fixed.** Mojibake (double-encoded UTF-8) in the 2007 Italian post and the 2009/08 archive
   page is repaired.
 - Post-2018 Wayback captures show that a third-party restore was served on the domain in 2023, with

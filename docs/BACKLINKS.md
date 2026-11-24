@@ -3,7 +3,7 @@
 Best-effort inventory of external pages that link to `infosecurity.ch`, the 2007-2017 blog
 of Fabio "naif" Pietrosanti, restored at <https://infosecurity.ch>.
 
-**Compiled:** 2026-10-06
+**Compiled:** 2026-10-06 - **second verification round:** 2026-11-24
 
 ## Totals
 
@@ -16,8 +16,8 @@ of Fabio "naif" Pietrosanti, restored at <https://infosecurity.ch>.
 | Distinct `infosecurity.ch` target URLs linked | 18 |
 | Target URLs that resolve to HTTP 200 | 14 |
 | Target URLs that do **not** work | 4 |
-| Pages that mention the blog without linking it | 11 |
-| Candidate pages that could not be fetched | 6 |
+| Pages checked and found not to link the blog | 14 |
+| Candidate pages that could not be fetched | 3 |
 
 Third-party linking domains: `connect-professional.de`, `csoonline.com`, `forums.theregister.com`, `heise.de`, `linkedin.com`, `lists.torproject.org`, `mgpf.it`, `narkive.com`, `news.ycombinator.com`, `personaldemocracy.com`, `schneier.com`, `seclists.org`, `theregister.com`, `voipsa.org`.
 
@@ -91,6 +91,9 @@ from Hacker News, works directly; `site/redirects.json` separately covers the tr
 | mailarchive.ietf.org | n/a | <https://mailarchive.ietf.org/arch/msg/rtcweb/_jPyVCz1mnzrwfH0mTQiWMM0RWI/> | [rtcweb] Support of SDES in WebRTC - sender address only. |
 | mailman.stanford.edu | 2012-12-03 | <https://mailman.stanford.edu/pipermail/liberationtech/2012-December/005865.html> | [liberationtech] Let's talk about ZRTP - carries only the From / In-Reply-To address lists@infosecurity.ch, no hyperlink to the site. Live page is 403 to automated fetches; verified through the Wayback Machine copy. |
 | seclists.org | 2011-05 | <https://seclists.org/fulldisclosure/2011/May/124> | "Leakdirectory: call for contribution" - no infosecurity.ch URL in the archived copy. |
+| decryptedmatrix.tumblr.com | 2012-06-02 | <https://decryptedmatrix.tumblr.com/post/23900366553/leak-site-directory> | "Leak Site Directory" - the list links `leakdirectory.org`; no reference to infosecurity.ch. Live page is behind a JavaScript challenge; verified on the 2015-11-08 Wayback copy. |
+| mobilemag.com | 2010-01-27 | <https://mobilemag.com/2010/01/27/voice-encryption-for-mobile-phones-cracked-12-out-of-15-methods-deemed-insecure/> | Covers the Notrax tests but references `infosecurityguard.com` only, like itiko.de. Origin TLS is broken today; verified on the 2022-05-24 Wayback copy. |
+| news.softpedia.com | 2015-10 | <https://news.softpedia.com/news/voip-phones-running-with-default-passwords-can-be-used-for-secret-surveillance-500401.shtml> | No reference to infosecurity.ch anywhere in the article. Live page is behind Cloudflare; verified on the 2016-02-22 Wayback copy. |
 | vicinolontano.it | n/a | <https://www.vicinolontano.it/ospiti/fabio-pietrosanti/> | "Il suo blog e infosecurity.ch" - domain written as plain text, not linked. |
 
 Mailing-list archives of messages sent from `@infosecurity.ch` are the largest group here: the
@@ -100,18 +103,25 @@ this category - its body links `lumicall.org` and Zorg, not the blog.
 
 ## Candidates that could not be verified
 
-| Site | Page | Blocker |
-|---|---|---|
-| athens.indymedia.org | <https://athens.indymedia.org/post/1298928/> | HTTP 429 on repeated attempts |
-| decryptedmatrix.tumblr.com | <https://decryptedmatrix.tumblr.com/post/23900366553/leak-site-directory> | HTTP 403 |
-| lexology.com | <https://www.lexology.com/library/detail.aspx?g=0200f331-2bae-4b09-ae56-c95829777170> | HTTP 403 (login wall) |
-| mobilemag.com | <https://mobilemag.com/2010/01/27/voice-encryption-for-mobile-phones-cracked-12-out-of-15-methods-deemed-insecure/> | HTTP 525 (origin TLS failure) |
-| news.softpedia.com | <https://news.softpedia.com/news/voip-phones-running-with-default-passwords-can-be-used-for-secret-surveillance-500401.shtml> | HTTP 403 |
-| techsupportforum.com | <https://www.techsupportforum.com/threads/accusations-fly-over-voice-encryption-hack.457961/> | bot gate: HTTP 307 to tollbit.techsupportforum.com, then 402 |
+| Site | Page | Blocker | Archive copy |
+|---|---|---|---|
+| athens.indymedia.org | <https://athens.indymedia.org/post/1298928/> | JavaScript challenge ("Verifying if your connection is secure"), HTTP 429 | none in the Wayback Machine |
+| lexology.com | <https://www.lexology.com/library/detail.aspx?g=0200f331-2bae-4b09-ae56-c95829777170> | JavaScript challenge, then a login wall | none in the Wayback Machine |
+| techsupportforum.com | <https://www.techsupportforum.com/threads/accusations-fly-over-voice-encryption-hack.457961/> | bot gate: HTTP 307 to tollbit.techsupportforum.com, then 402 / HTTP 202 placeholder | none in the Wayback Machine |
 
-All of these are plausible linkers - they cover the SecurStar/Notrax story or VoIP
-interception - but each returned an error or a bot gate, so they are recorded as unverified
-rather than counted.
+All three are plausible linkers - they cover the SecurStar/Notrax story or VoIP interception -
+but none can be read without executing JavaScript, and none has a Wayback capture, so they stay
+unverified rather than counted.
+
+### Second round, 2026-11-24
+
+The six candidates of October were retried from a residential line (the datacenter IP was the
+suspected cause). It was not the cause: all six answer exactly as before, with a JavaScript
+challenge page (Cloudflare and similar), an HTTP 202 placeholder or a broken origin TLS. Three
+of them do have a Wayback capture of the article itself, and those three are now settled - none
+links infosecurity.ch, so they moved to the table above. `archive.today` was unreachable from
+both routes (TLS handshake failure), so it could add nothing. No CAPTCHA was solved and no page
+was fetched more than once per route.
 
 ## Method and limits
 
@@ -150,12 +160,25 @@ instead; none appeared among the backlinks found here.
 - **The 4 dead targets are not on this site**: they are files that lived on
   `privacyresearch.infosecurity.ch`, the Tor exit-node research VPS, linked once from tor-talk in
   October 2011. That hostname has no DNS record today, so nothing served from this repo can answer
-  it. Two choices, both needing Fabio:
-  1. leave it — one 2011 mailing-list message points at four shell scripts and two text files;
-  2. restore it — recover the files from Wayback (rate-limited at the time of writing, retry later),
-     put them in a small second repo with `CNAME = privacyresearch.infosecurity.ch` (GitHub Pages
-     allows one custom domain per repository, so the main repo cannot serve that hostname), and add
-     a `CNAME privacyresearch → fpietrosanti.github.io` record at EuroDNS.
+  it. **Resolved on 2026-11-24: nothing can be restored, and the hostname is better left dead.**
+  The Wayback Machine holds only six captures of the whole subdomain, and not one of them contains
+  the files:
+
+  | Capture | URL | Result |
+  |---|---|---|
+  | 2011-02-28 | `/` | HTTP 200, empty body |
+  | 2014-10-05 | `/blocktest/blacklist-stat.sh` | HTTP 302 → `prostosale.com` |
+  | 2014-10-05 | `/blocktest/blacklisted.txt` | HTTP 302 → `prostosale.com` |
+  | 2014-10-05 | `/blocktest/blocklist-stat.txt` | HTTP 302 → `prostosale.com` |
+  | 2014-10-05 | `/blocktest/extract-blacklisted-ip.sh` | HTTP 302 → `prostosale.com` |
+  | 2017-10-26 | `/robots.txt` | HTTP 200, an online-shop template (`/admin/`, `/order/`, `/content/`) |
+
+  The crawler reached the files only after the subdomain had already been taken over, so their
+  content was never archived: option 2 (recover from Wayback into a second repo with its own
+  `CNAME`) has nothing to recover. Recreating the hostname would also mean reviving a name whose
+  last known content was a spam shop, which is the opposite of useful. **Recommendation: option 1,
+  leave it.** The four URLs stay dead, as they have been since at least 2014 — three years before
+  the blog itself went offline.
 - **No scraped mirror found.** Searches for the blog's tagline and for the title of the most-copied
   post return only infosecurity.ch itself, i.e. no third party is holding traffic on a stale copy.
 - **Outreach**: see [OUTREACH.md](OUTREACH.md). Six contactable publishers, ready-to-send drafts in

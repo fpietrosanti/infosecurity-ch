@@ -9,11 +9,11 @@ tags: [privacy]
 
 # My TOR exit node experience trying to filter out noisy traffic
 
-Early this year i decided that’s time to run a TOR exit node so i brought a VPS at [hetzner.de](http://hetzner.de/) (because they are listed as a [Good TOR ISP](https://trac.torproject.org/projects/tor/wiki/TheOnionRouter/GoodBadISPs))and setup the exit-node with nickname [privacyresearch.infosecurity.ch](http://88.198.109.35/) with a 100Mbit/s connection for first 1TB of monthly data, then 10MBit/s flat.
+Early this year i decided that’s time to run a TOR exit node so i brought a VPS at [hetzner.de](http://hetzner.de/) (because they are listed as a [Good TOR ISP](https://trac.torproject.org/projects/tor/wiki/TheOnionRouter/GoodBadISPs))and setup the exit-node with nickname [privacyresearch.infosecurity.ch](https://web.archive.org/web/20110303031846/http://88.198.109.35/) with a 100Mbit/s connection for first 1TB of monthly data, then 10MBit/s flat.
 
-It also run [TOR2WEB](http://www.tor2web.org/) software on <http://tor.infosecurity.ch> .
+It also run [TOR2WEB](http://www.tor2web.org/) software on http://tor.infosecurity.ch .
 
-I setup the [exit-policy](http://88.198.109.35/exitpolicy.txt) as suggested by running [exit-node with minimal harassment](https://blog.torproject.org/blog/tips-running-exit-node-minimal-harassment) and prepared an [abuse response template](https://trac.torproject.org/projects/tor/wiki/TheOnionRouter/TorAbuseTemplates).
+I setup the [exit-policy](https://web.archive.org/web/20110303031549/http://88.198.109.35/exitpolicy.txt) as suggested by running [exit-node with minimal harassment](https://blog.torproject.org/blog/tips-running-exit-node-minimal-harassment) and prepared an [abuse response template](https://trac.torproject.org/projects/tor/wiki/TheOnionRouter/TorAbuseTemplates).
 
 In the first day i’ve been running the node i received immediately DMCA complain due to peer to peer traffic.
 

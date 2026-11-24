@@ -387,6 +387,42 @@ SLIDESHARE_DECKS = {
 
 ARCHIVE_INDEX = "/archive/"
 
+# Dead hosts that were the author's own. The 2011 Tor exit-node VPS (88.198.109.35, a
+# Hetzner address that can be reassigned to anyone) and the Tor2web instance on
+# tor.infosecurity.ch no longer exist: that hostname and privacyresearch.infosecurity.ch
+# have no DNS record, and every Wayback capture of them from 2013 to 2017 is a 302 to a
+# spam shop (prostosale.com) - the same takeover that had rewritten the tor.infosecurity.ch
+# link inside this very post. Linking to the last good capture keeps the reference working
+# and points at content instead of at whoever holds the address now.
+DEAD_SELF_LINKS = {
+    "http://88.198.109.35/": "https://web.archive.org/web/20110303031846/http://88.198.109.35/",
+    "http://88.198.109.35/exitpolicy.txt": (
+        "https://web.archive.org/web/20110303031549/http://88.198.109.35/exitpolicy.txt"
+    ),
+}
+# tor.infosecurity.ch: the only 200 capture (2011-02-28) has an empty body, so there is
+# nothing worth linking to. The anchor text is the URL itself, so unlinking loses nothing.
+UNLINK_DEAD_LINKS = ("http://tor.infosecurity.ch",)
+# The historical /outgoing/ click-tracking URLs still have to redirect somewhere, so there
+# they point at the archived capture instead of at the dead host.
+DEAD_STUB_TARGETS = {
+    **DEAD_SELF_LINKS,
+    "http://tor.infosecurity.ch": "https://web.archive.org/web/20110228055425/http://tor.infosecurity.ch/",
+}
+
+
+def fix_dead_self_links(s: str) -> str:
+    for old, new in DEAD_SELF_LINKS.items():
+        s = s.replace(f'href="{old}"', f'href="{new}" rel="nofollow noopener"')
+    for url in UNLINK_DEAD_LINKS:
+        s = re.sub(
+            r'<a\s+href="' + re.escape(url) + r'"[^>]*>(.*?)</a>',
+            lambda m: m.group(1),
+            s,
+            flags=re.S,
+        )
+    return s
+
 
 def slideshare_link(slug: str) -> str:
     name = slug.replace("-", " ")
@@ -463,6 +499,7 @@ def cleanup(s: str, outgoing_map: dict) -> str:
         s,
         flags=re.S,
     )
+    s = fix_dead_self_links(s)
     s = re.sub(r"<script>window\.RufflePlayer.*?</script>\s*", "", s, flags=re.S)
     s = re.sub(r'<script[^>]*src="[^"]*ruffle/ruffle\.js"[^>]*>\s*</script>\s*', "", s)
     # Comment form -> closed notice
@@ -678,6 +715,7 @@ def stub_html(target: str) -> str:
 
 
 def write_stub(path_url: str, target: str, overwrite=False) -> bool:
+    target = DEAD_STUB_TARGETS.get(target, target)
     out = SITE / path_url.strip("/") / "index.html"
     if out.exists() and not overwrite:
         return False
