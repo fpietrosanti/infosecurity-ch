@@ -390,8 +390,9 @@ ARCHIVE_INDEX = "/archive/"
 # Dead hosts that were the author's own. The 2011 Tor exit-node VPS (88.198.109.35, a
 # Hetzner address that can be reassigned to anyone) and the Tor2web instance on
 # tor.infosecurity.ch no longer exist: that hostname and privacyresearch.infosecurity.ch
-# have no DNS record, and every Wayback capture of them from 2013 to 2017 is a 302 to a
-# spam shop (prostosale.com) - the same takeover that had rewritten the tor.infosecurity.ch
+# have no DNS record, and their Wayback captures from 2013 on are all 302s - the ones
+# followed land on a spam shop (prostosale.com), the same takeover that had rewritten the
+# tor.infosecurity.ch
 # link inside this very post. Linking to the last good capture keeps the reference working
 # and points at content instead of at whoever holds the address now.
 DEAD_SELF_LINKS = {

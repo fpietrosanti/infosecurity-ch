@@ -42,7 +42,8 @@ Restored on 2026-09-17 from a Wayback download (1,653 files): WordPress 4.8, the
   `tor.infosecurity.ch` link pointed to a spam site (`prostosale.com`). The original target is restored.
   The cause is now documented (2026-11-24): it was not the blog that was tampered with but the
   **sibling subdomains**. Every Wayback capture of `tor.infosecurity.ch` and
-  `privacyresearch.infosecurity.ch` from 2013 to 2017 is an HTTP 302 to `prostosale.com`, and the
+  `privacyresearch.infosecurity.ch` from 2013 on is an HTTP 302, and the ones followed (2013-09-25
+  and 2014-10-05) redirect to `prostosale.com`; the
   2017 `robots.txt` of `privacyresearch` is an online-shop template. Both hostnames had been taken
   over after the research VPS was decommissioned; the downloader simply followed the redirect.
 - **Dead self-owned links repointed** (2026-11-24). The same post linked the exit node's own pages
